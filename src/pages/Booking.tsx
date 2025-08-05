@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react';
 import BookingDatePicker from '../components/ReactDatepicker';
 import { supabase } from '../lib/supabaseClient'; // 按路径调整
 import { format } from 'date-fns'
+import toast from 'react-hot-toast';
 
 const Booking = () => {
 
@@ -47,7 +48,7 @@ const Booking = () => {
 
     const handleSubmit = async () => {
         if (!name || !phone || !email || !service || !selectedSlot || !selectedDate) {
-          alert('请填写所有必填信息');
+            toast.error('请填写完整的表格内容'); 
           return;
         }
 

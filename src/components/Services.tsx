@@ -2,18 +2,8 @@ import { services } from "../utils/Utils"
 import { customers } from "../utils/Utils"
 import Marquee from 'react-fast-marquee';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 
 const Services = () => {
-
-
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate('/booking');
-  };
-
-
   return (
     <section id='services' className=' scroll-mt-10'>
 <div  className='w-11/12 mx-auto mb-4 '>
@@ -102,12 +92,12 @@ const Services = () => {
 </Marquee>
  </div>
 
- <button
-      onClick={handleClick}
+    <Link 
+      to="/booking"
       className="mx-auto mt-4 px-16 py-2 text-gray-500 hover:text-white hover:bg-green-500 border-2 hover:border-green-500 border-gray-300 text-xl transition-colors duration-300 cursor-pointer opacity-80 rounded-full bg-white"
     >
-      马上预
-    </button>
+      马上预约
+    </Link>
 
  </div>
 
