@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+.react-datepicker {
+  @apply bg-white border rounded-lg shadow-md p-2;
+}
+.react-datepicker__day--selected {
+  @apply bg-teal-500 text-white;
+}
+.react-datepicker__day:hover {
+  @apply bg-teal-100;
+}
