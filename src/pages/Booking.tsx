@@ -32,8 +32,6 @@ const Booking = () => {
             .from('bookings')
             .select('time')
             .eq('date', formattedDate)
-
-            console.log(data, error)
       
           if (error) {
             console.error('获取已预约 slot 失败:', error)
@@ -51,13 +49,6 @@ const Booking = () => {
             toast.error('请填写完整的表格内容'); 
           return;
         }
-
-        console.log(name)
-        console.log(phone)
-        console.log(email)
-        console.log(service)
-        console.log(selectedSlot)
-        console.log(selectedDate)
     
         const dateString = selectedDate.toISOString().split('T')[0];
     

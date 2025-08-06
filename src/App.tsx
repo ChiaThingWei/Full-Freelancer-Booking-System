@@ -4,6 +4,9 @@ import Home from './pages/Home';
 import Booking from './pages/Booking';
 import ScrollToTop from './components/ScrollToTop';
 import { Toaster } from 'react-hot-toast';
+import AdminLayout from './layout/AdminLayout';
+import Dashboard from './pages/admin/Dashboard';
+import ManageBooking from './pages/admin/ManageBooking';
 
 function App() {
 
@@ -16,6 +19,13 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/booking" element={<Booking />} />
+
+        <Route path='/admin' element={<AdminLayout/>}>
+          <Route index element={<Dashboard/>}/>
+          <Route path='managebooking' element={<ManageBooking/>}/>
+
+        </Route>
+
       </Routes>
     </BrowserRouter>
     </>
