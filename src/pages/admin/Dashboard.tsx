@@ -1,5 +1,23 @@
 import Card from "./components/Card"
 import Card2 from "./components/Card2"
+import DistributionChart from "./components/DistributionChart"
+import MonthlyCompletedLineChart from "./components/LineChart"
+
+const datas=[
+  { month: 'Jan', count: 3 },
+  { month: 'Feb', count: 7 },
+  { month: 'Mar', count: 5 },
+  { month: 'Apr', count: 3 },
+  { month: 'May', count: 9 },
+  { month: 'Jun', count: 13 },
+  { month: 'Jul', count: 5 },
+  { month: 'Aug', count: 5 },
+  { month: 'Sep', count: 1 },
+  { month: 'Oct', count: 5 },
+  { month: 'Nov', count: 15 },
+  { month: 'Dec', count: 11 },
+]
+
 
 const Dashboard = () => {
   return (
@@ -16,6 +34,14 @@ const Dashboard = () => {
         <div>
             <p className="p-2 font-semibold  text-xl my-4">Upcoming Bookings</p>
 
+        </div>
+
+        <div className="mb-20">
+          <DistributionChart/>
+        </div>
+
+        <div>
+          <MonthlyCompletedLineChart data={datas}/>
         </div>
 
     </div>
