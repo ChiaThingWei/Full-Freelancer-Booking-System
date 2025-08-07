@@ -1,5 +1,5 @@
-import { services } from "../utils/Utils"
-import { customers } from "../utils/Utils"
+import { services } from "../../../utils/Utils"
+import { customers } from "../../../utils/Utils"
 import Marquee from 'react-fast-marquee';
 import { Link } from 'react-router-dom';
 

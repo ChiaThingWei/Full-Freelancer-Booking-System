@@ -1,7 +1,7 @@
-import Card from "./components/Card"
-import Card2 from "./components/Card2"
-import DistributionChart from "./components/DistributionChart"
-import MonthlyCompletedLineChart from "./components/LineChart"
+import Card from "../components/Card"
+import Card2 from "../components/Card2"
+import DistributionChart from "../components/DistributionChart"
+import MonthlyCompletedLineChart from "../components/LineChart"
 
 const datas=[
   { month: 'Jan', count: 3 },

@@ -22,8 +22,18 @@ const AdminLayout = () => {
         w-64 bg-gray-800 text-white p-4 h-full`}>
         <h1 className="text-xl font-bold mb-4">Admin Panel</h1>
         <ul className="space-y-2">
-          <li className='flex flex-row cursor-pointer hover:bg-gray-700 rounded-full py-2 px-1 transition-colors duration-200'><RiDashboard2Line className='ml-1 my-auto'/><a href="/admin" className="ml-4 block">Dashboard</a></li>
-          <li className='flex flex-row cursor-pointer hover:bg-gray-700 rounded-full py-2 px-1 transition-colors duration-200'><RiDatabase2Line className='ml-1 my-auto'/><a href="/admin/managebooking" className="ml-4 block">Manage Bookings</a></li>
+        <a href="/admin">
+  <li className='flex flex-row cursor-pointer hover:bg-gray-700 rounded-full py-2 px-1 transition-colors duration-200'>
+    <RiDashboard2Line className='ml-1 my-auto'/>
+    <span className="ml-4 block">Dashboard</span>
+  </li>
+</a>
+<a href="/admin/managebooking">
+  <li className='flex flex-row cursor-pointer hover:bg-gray-700 rounded-full py-2 px-1 transition-colors duration-200'>
+    <RiDatabase2Line className='ml-1 my-auto'/>
+    <span className="ml-4 block">Manage Bookings</span>
+  </li>
+</a>
           <li>
             <button
               onClick={() => {

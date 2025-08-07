@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react';
 import { InstagramEmbed } from 'react-social-media-embed';
-import { gsapGroup1, gsapGroup2 } from '../utils/AnimateGsap';
+import { gsapGroup1, gsapGroup2 } from '../../../utils/AnimateGsap';
 
 const Portfolio = () => {
 

@@ -1,12 +1,14 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Booking from './pages/Booking';
-import ScrollToTop from './components/ScrollToTop';
+import Home from './modules/app/pages/Home';
+import Booking from './modules/app/pages/Booking';
+import ScrollToTop from './modules/app/components/ScrollToTop';
 import { Toaster } from 'react-hot-toast';
 import AdminLayout from './layout/AdminLayout';
-import Dashboard from './pages/admin/Dashboard';
-import ManageBooking from './pages/admin/ManageBooking';
+import Dashboard from './modules/admin/pages/Dashboard';
+import ManageBooking from './modules/admin/pages/ManageBooking';
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './lib/queryClient';
 
 function App() {
 
@@ -16,6 +18,7 @@ function App() {
   <BrowserRouter>
   <ScrollToTop/>
   <Toaster position="bottom-right" reverseOrder={false} />
+  <QueryClientProvider client={queryClient}>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/booking" element={<Booking />} />
@@ -27,6 +30,7 @@ function App() {
         </Route>
 
       </Routes>
+      </QueryClientProvider>
     </BrowserRouter>
     </>
   )

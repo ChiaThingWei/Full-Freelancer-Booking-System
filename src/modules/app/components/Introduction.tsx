@@ -1,6 +1,6 @@
 import { ArrowDown } from 'lucide-react';
 import { useEffect } from 'react';
-import { moveUpGsap } from '../utils/AnimateGsap';
+import { moveUpGsap } from '../../../utils/AnimateGsap';
 
 const Introduction = () => {
 
