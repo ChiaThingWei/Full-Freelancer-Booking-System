@@ -1,36 +1,36 @@
+import { useBookingFilterStore } from "@/lib/store/bookingFilterStore"
+import BookingCard from "../components/BookingCard"
 import Menu from "../components/Menu"
-import { useQuery } from "@tanstack/react-query"
-import { fetchAllBookings } from "@/lib/api/booking"
-import { useBookingStore } from "@/lib/store/bookingStore"
+import { useBookingQuery, useBookingByStatus } from "@/lib/hooks/useBookingQuery"
+
+
 
 const ManageBooking = () => {
 
-  const {data: bookings, isLoading, error} = useQuery({
-    queryKey: ['bookings'],
-    queryFn: fetchAllBookings,
-  });
+  const {statusFilter, setStatusFilter} = useBookingFilterStore()
+  const { data: allBookings, isLoading: isAllLoading, error: allError } = useBookingQuery();
+  const { data: filteredBookings, isLoading: isFilteredLoading, error: filteredError } =
+    useBookingByStatus(statusFilter);
 
-  const setSelectedBooking = useBookingStore((state) => state.setSelectedBookingId);
+    const bookingsToShow = statusFilter === "all" ? allBookings : filteredBookings;
+    const isLoading = statusFilter === "all" ? isAllLoading : isFilteredLoading;
+    const error = statusFilter === "all" ? allError : filteredError;
+  
+    if (isLoading) return <p>Loading...</p>;
+    if (error) return <p>Something went wrong</p>;
 
-  if (isLoading) return <p>Loading...</p>
-  if(error) return <p>Error:{error.message}</p>
+ 
 
   return (
-    <div>
+    <div className="w-full">
        <h1 className='p-2 font-semibold text-xl mb-4'>Manage Booking</h1>
-      <Menu/>
+       
+        <div className="">
+          <Menu setStatusFilter={setStatusFilter} active={statusFilter} />
+        </div>
 
-      <div className="mt-4">
-      <ul className="space-y-2">
-        {bookings?.map((booking)=>(
-          <li key={booking.id} 
-          onClick={()=> setSelectedBooking(booking)}
-          className="p-4 bg-gray-400 rounded shadow">
-            <p><strong>Name:</strong>{booking.name}</p>
-            <p><strong>Email:</strong>{booking.email}</p>
-          </li>
-        ))}
-        </ul>
+      <div className="mt-4 w-full">
+        <BookingCard bookings={bookingsToShow || []}/>
       </div>
     </div>
   )

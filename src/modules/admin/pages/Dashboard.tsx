@@ -2,6 +2,7 @@ import Card from "../components/Card"
 import Card2 from "../components/Card2"
 import DistributionChart from "../components/DistributionChart"
 import MonthlyCompletedLineChart from "../components/LineChart"
+import UpcomingBookingCard from "../components/UpcomingBookingCard"
 
 const datas=[
   { month: 'Jan', count: 3 },
@@ -33,7 +34,7 @@ const Dashboard = () => {
 
         <div>
             <p className="p-2 font-semibold  text-xl my-4">Upcoming Bookings</p>
-
+            <UpcomingBookingCard/>
         </div>
 
         <div className="mb-20">

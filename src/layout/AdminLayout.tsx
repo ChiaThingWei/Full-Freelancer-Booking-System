@@ -55,7 +55,7 @@ const AdminLayout = () => {
           <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-xl">
             ☰
           </button>
-          <h2 className="text-lg font-semibold">Admin</h2>
+          <h2 className="text-lg font-semibold">Your Name</h2>
         </header>
 
         {/* Page content */}
