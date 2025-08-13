@@ -7,6 +7,7 @@ interface BookingFilterState {
   setStatusFilter: (status: string) => void
 }
 
+// zustand use to hold the condition
 export const useBookingFilterStore = create<BookingFilterState>()(
   persist(
     (set) => ({
@@ -16,3 +17,22 @@ export const useBookingFilterStore = create<BookingFilterState>()(
     { name: 'booking-filter' } // localStorage key
   )
 )
+
+interface BookingPaginationState {
+  page: number;
+  limit: number;
+  setPage: (page: number) => void;
+  setLimit: (limit: number) => void;
+}
+
+export const useBookingPaginationStore = create<BookingPaginationState>()(
+  persist(
+    (set) => ({
+      page: 1,
+      limit: 10,
+      setPage: (page) => set({ page }),
+      setLimit: (limit) => set({ limit }),
+    }),
+    { name: 'booking-pagination' } // localStorage key
+  )
+);

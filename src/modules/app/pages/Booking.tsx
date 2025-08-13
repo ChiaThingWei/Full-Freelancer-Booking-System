@@ -183,7 +183,7 @@ const Booking = () => {
        
                     <div
                     key={index}
-                    onClick={() => setService(srv.title)}
+                    onClick={() => setService(srv.service)}
                     className={`flex flex-row justify-between border-2 border-gray-300 items-center bg-white rounded p-6 cursor-pointer hover:scale-105 transition-transform duration-300 ${
                       service === srv.title ? 'ring-2 ring-green-300' : ''
                     }`}

@@ -16,33 +16,34 @@ interface BookingCardProps {
   }
 
   export interface Booking {
-    id: number;
-    name: string;
-    date: string;
-    time: string;
+    id: number
+    name: string
+    date: string
+    time: string
+    service: string
     status: 'pending' | 'confirmed' | 'shooting_done' | 'delivered' | string;
-    email: string;
-    phone: string;
-    remarks?: string;
-    created_at: string;
+    email: string
+    phone: string
+    remarks?: string
+    created_at: string
+    confirmedFee: number
   }
 
 const BookingCard = ({ bookings }: BookingCardProps) => {
  
-    // const [statusFilter, setStatusFilter] = useState('all')
-    // const { data: allBookings, isLoading: isAllLoading, error: allError } = useBookingQuery()
-    // const { data: filteredBookings, isLoading: isFilteredLoading, error: filteredError } = useBookingByStatus(statusFilter)
-  
-    // const bookingsToShow = statusFilter === 'all' ? allBookings : filteredBookings;
-  
-    // const isLoading = statusFilter === 'all' ? isAllLoading : isFilteredLoading;
-    // const error = statusFilter === 'all' ? allError : filteredError;
-  
+  const options = [
+    { label: 'All', value: 'all' },
+    { label: 'Pending Approve', value: 'pending' },
+    { label: 'Upcoming', value: 'confirmed' },
+    { label: 'Done Shooting', value: 'shooting_done' },
+    { label: 'Completed', value: 'completed' },
+  ] 
+
     if (!bookings ) return <p>Loading...</p>
-    if (bookings.length === 0 ) return <p>Something went wrong</p>
+    if (bookings.length === 0 ) return <p>No Result</p>
 
   return (
-    <div>
+    <div className='block lg:hidden'>
         <ul className="space-y-2 w-full">
         {bookings?.map((booking)=>(
           <li key={booking.id} 
@@ -80,7 +81,15 @@ const BookingCard = ({ bookings }: BookingCardProps) => {
 
                     <div className="flex flex-row">
                     <ClipboardClock className="size-5 my-auto text-gray-400" /> 
-                    <p className="ml-4 text-sm md:text-md my-auto">{booking.status}</p>
+                    <p className="ml-4 text-sm md:text-md my-auto">
+                    {options.find(option => option.value === booking.status)?.label}
+                      {/* {booking.status} */}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-row">
+                    <Clock8 className="size-5 my-auto text-gray-400" /> 
+                    <p className="ml-4 text-sm md:text-md my-auto">{booking.service}</p>
                     </div>
                  
                 </div>
@@ -101,6 +110,11 @@ const BookingCard = ({ bookings }: BookingCardProps) => {
                         <div className="flex flex-row">
                         <CalendarArrowUp className="size-5 my-auto text-gray-400" /> 
                         <p className="ml-4 text-sm md:text-md my-auto">{dayjs(booking.created_at).format('YYYY-MM-DD HH:mm:ss')}</p>
+                        </div>
+
+                        <div className="flex flex-row">
+                        <Clock8 className="size-5 my-auto text-gray-400" /> 
+                        <p className="ml-4 text-sm md:text-md my-auto">{booking.confirmedFee}</p>
                         </div>
 
                       </div>

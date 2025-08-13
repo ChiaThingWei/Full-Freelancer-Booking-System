@@ -1,49 +1,86 @@
+import { useMonthlyBookingStats } from "@/lib/hooks/useBookingQuery"
 import Card from "../components/Card"
 import Card2 from "../components/Card2"
 import DistributionChart from "../components/DistributionChart"
 import MonthlyCompletedLineChart from "../components/LineChart"
 import UpcomingBookingCard from "../components/UpcomingBookingCard"
+import MonthlyRevenueLineChart from "../components/RevenueLineChart"
 
-const datas=[
-  { month: 'Jan', count: 3 },
-  { month: 'Feb', count: 7 },
-  { month: 'Mar', count: 5 },
-  { month: 'Apr', count: 3 },
-  { month: 'May', count: 9 },
-  { month: 'Jun', count: 13 },
-  { month: 'Jul', count: 5 },
-  { month: 'Aug', count: 5 },
-  { month: 'Sep', count: 1 },
-  { month: 'Oct', count: 5 },
-  { month: 'Nov', count: 15 },
-  { month: 'Dec', count: 11 },
-]
 
 
 const Dashboard = () => {
+
+  const { data, isLoading, error } = useMonthlyBookingStats()
+
+  if (isLoading) return <div>Loading...</div>
+  if (error) return <div>Error loading stats</div>
+
+
   return (
     <div>
         <h1 className='p-2 font-semibold text-xl mb-4'>Admin Dashboard</h1>
-        <div className='grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-5 md:grid-cols-4'>
+        <div className='grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-5 lg:grid-cols-4'>
 
-            <Card title="Summary" data={23} bordercolor="border-blue-400" subtitle='this month' subtitle1='Completed shoots' subtitle2='Fully completed' data1={30} />
-            <Card2 title="Pending Approvals" data={3}  subtitle="Please confirm as soon as possible" subtitle1='' subtitle2='' />
-            <Card2 title="Pending Photo Delivery" data={5}  subtitle="Shoots completed but photos not delivered" subtitle1='' subtitle2='' />
-            <Card2 title="Revenue (in RM)" data={898.00}  subtitle="this month" subtitle1='' subtitle2='' />
+            <Card title="Summary"  
+              bgColor="bg-blue-200"
+              subtitle='this month' 
+              subtitle1='Total Booking' 
+              subtitle2='Total Confirmed' 
+              subtitle3='Done Shooting'
+              subtitle4="Fully Completed"
+              data1={data?.total || 0}
+              data2={data?.totalPending || 0}
+              data3={data?.byStatus['shooting_done'] || 0} 
+              data4={data?.byStatus['completed'] || 0}
+              />
+
+            <Card2 title="Pending Approvals" 
+              data={data?.totalPending || 0}  
+              subtitle="Please confirm as soon as possible"
+              bgColor="bg-red-300" 
+             />
+
+            <Card2 title="Pending Photo Delivery" 
+              data={data?.totalShootingDone || 0}  
+              subtitle="Shoots completed but photos not delivered" 
+               />
+            <Card title="Revenue (in RM)" 
+             data1={data?.estimatedRevenue || 0}  
+             data2={data?.totalRevenue || 0}
+             subtitle="this month" 
+             subtitle1="Estimated Revenue"
+             subtitle2="Exact Revenue"
+             bgColor="bg-yellow-200"
+             />
         </div>
 
-        <div>
-            <p className="p-2 font-semibold  text-xl my-4">Upcoming Bookings</p>
+        <div className="border-y-2 my-4 border-gray-300">
+            <p className="pl-2 font-semibold  text-xl my-4">Upcoming Bookings</p>
             <UpcomingBookingCard/>
+        </div>
+
+        <div className="lg:flex mb-20">
+          
+          <div className="bg-white rounded flex px-6 py-10 justify-center lg:w-1/2">
+          <MonthlyRevenueLineChart/>
+          </div>
+
+          <div className="lg:w-1/2 bg-white md:ml-2 mt-4 md:mt-0 px-6 py-10  rounded">
+          <MonthlyCompletedLineChart/>
+          </div>
+        </div>
+
+        <div className="mb-20">
+         
         </div>
 
         <div className="mb-20">
           <DistributionChart/>
         </div>
 
-        <div>
-          <MonthlyCompletedLineChart data={datas}/>
-        </div>
+        
+
+        <div className=""></div>
 
     </div>
   )

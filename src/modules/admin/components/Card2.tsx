@@ -8,12 +8,12 @@ type CardProps = {
   subtitle?: string;
   subtitle1?: string;
   subtitle2?: string;
-  bordercolor?: string; 
+  bgColor?: string; 
 }
 
-const Card2 = ({title,data,subtitle, bordercolor = ''}: CardProps) => {
+const Card2 = ({title,data,subtitle, bgColor = ''}: CardProps) => {
     return (
-      <div className={` ${bordercolor} text-gray-800 flex justify-between hover:scale-105 transition-transform duration-300 bg-gray-300 flex-col  p-3 rounded-xl overflow-hidden `}>
+      <div className={` ${bgColor} text-gray-800 flex justify-between hover:scale-105 transition-transform duration-300 bg-gray-300 flex-col  p-3 rounded-xl overflow-hidden `}>
    
        
           <div className='flex flex-col h-1/2'>

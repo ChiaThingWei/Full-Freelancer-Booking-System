@@ -1,12 +1,4 @@
-// import {
-//   DropdownMenu,
-//   DropdownMenuContent,
-//   DropdownMenuLabel,
-//   DropdownMenuRadioGroup,
-//   DropdownMenuRadioItem,
-//   DropdownMenuSeparator,
-//   DropdownMenuTrigger,
-// } from "@/components/ui/dropdown-menu"
+import {motion} from 'framer-motion'
 
 import {
   Drawer,
@@ -19,6 +11,7 @@ import {
 } from "@/components/ui/drawer"
 
 import { SlidersHorizontal } from "lucide-react"
+import { useBookingPaginationStore } from '@/lib/store/bookingFilterStore'
 
 interface MenuProps {
   setStatusFilter: (status: string) => void
@@ -28,6 +21,8 @@ interface MenuProps {
 
 const Menu = ({ setStatusFilter, active }: MenuProps) => {
 
+  const {setPage} = useBookingPaginationStore()
+
   const options = [
     { label: 'All', value: 'all' },
     { label: 'Pending Approve', value: 'pending' },
@@ -36,32 +31,14 @@ const Menu = ({ setStatusFilter, active }: MenuProps) => {
     { label: 'Completed', value: 'completed' },
   ]
 
-  // return (
-  //   <div className='flex flex-row gap-3 justify-evenly my-4 mx-2 bg-white px-4 py-2 rounded-l shadow-sm w-full'>
-
-  //       {options.map(({ label, value })=>(
-
-  //               <button key={value} 
-  //               onClick={()=>setStatusFilter(value)}
-  //               className={`hover:bg-blue-200 px-4 py-1 transition-colors duration-300 rounded-lg
-  //               ${active === value ? 'bg-blue-200':'bg-white'}
-  //               `}>
-  //                   {label}
-  //               </button>
-
-  //       )
-
-  //       )}
-  //   </div>
-  // )
-
   return (
+
+
     <div className="my-4 w-full">
       
-
-      <div className="sm:hidden bg-white w-1/3 px-4 py-2 rounded-lg shadow-sm">
+      <div>
+      <div className="lg:hidden bg-white w-1/3 px-4 py-2 rounded-lg shadow-sm">
        
-
           <Drawer>
         <DrawerTrigger> 
           <div className="w-full text-center py-2 cursor-pointer flex flex-row justify-between ">
@@ -73,7 +50,7 @@ const Menu = ({ setStatusFilter, active }: MenuProps) => {
         </DrawerTrigger>
         <DrawerContent className="h-[60%]">
           <DrawerHeader>
-            <DrawerTitle className="text-start text-3xl mb-4">Status</DrawerTitle>
+            <DrawerTitle className="text-start text-3xl mb-4">Booking Status</DrawerTitle>
             {/* <DrawerDescription>This action cannot be undone.</DrawerDescription> */}
           </DrawerHeader>
          <DrawerClose>
@@ -82,7 +59,10 @@ const Menu = ({ setStatusFilter, active }: MenuProps) => {
 
               <button
               key={value}
-              onClick={() => setStatusFilter(value)}
+              onClick={() => {
+                setStatusFilter(value); 
+                setPage(1)}}
+
               className={`
                 ${active === value ? 'border-1 border-gray-500':''}
                 w-full text-xl text-start cursor-pointer rounded-lg px-3 py-2 `}
@@ -111,20 +91,38 @@ const Menu = ({ setStatusFilter, active }: MenuProps) => {
 
         </DrawerContent>
       </Drawer>
+      
+      </div>
+
+        <p className="p-2 mt-4 font-bold lg:hidden">
+            {options.find(option => option.value === active)?.label}
+        </p>
+        
       </div>
   
-      <div className="hidden sm:flex flex-row gap-3 justify-evenly bg-white px-4 py-2 rounded-lg shadow-sm">
-        {options.map(({ label, value }) => (
-          <button
-            key={value}
-            onClick={() => setStatusFilter(value)}
-            className={`hover:bg-blue-200 px-4 py-1 transition-colors duration-300 rounded-lg
-            ${active === value ? 'bg-blue-200' : 'bg-white'}
-            `}
-          >
-            {label}
+      <div className="hidden lg:flex flex-row gap-3 justify-evenly bg-white px-4 py-2 rounded-lg">
+        {options.map(({ label, value }) => {
+
+          return(
+            <button
+              key={value}
+              onClick={() => {setStatusFilter(value); setPage(1);}}
+              className="relative z-10 px-4 py-1 cursor-pointer transition-colors duration-300 rounded-lg"
+            >
+
+            {active === value && (
+            
+            <motion.div
+              layoutId='active-pill'
+              className="absolute inset-0 bg-blue-200 rounded-lg"
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            />
+            
+            )}
+            <span className="relative z-20">{label}</span>
           </button>
-        ))}
+          )
+})}
       </div>
     </div>
   )

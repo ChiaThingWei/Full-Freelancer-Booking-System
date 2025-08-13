@@ -48,6 +48,7 @@ export const customers = [
       price: 'From RM99',
       img: '/images/js-graduate.webp',
       title: '毕业照',
+      service: 'graduation',
       desc: '以自信与仪式感，定格穿上学袍的高光时刻——无论在校园或户外。',
       details: [
         '个人毕业肖像或小型合影',
@@ -62,6 +63,7 @@ export const customers = [
       price: 'From RM199',
       img: '/images/pro1.webp',
       title: '专业形象照',
+      service: 'professional',
       desc: '干净、利落的肖像照，适合用在 LinkedIn、履历或商务场合。',
       details: [
         '个人肖像拍摄',
@@ -76,6 +78,7 @@ export const customers = [
       price: 'From RM129',
       img: '/images/outdoor.webp',
       title: '户外人像',
+      service: 'outdoor',
       desc: '自然光与风景为背景，捕捉独处、情侣或生活感的自然瞬间。',
       details: [
         '适合个人、情侣或朋友拍摄',
@@ -90,6 +93,7 @@ export const customers = [
       price: 'From RM159',
       img: '/images/fam.webp',
       title: '家庭合影',
+      service: 'family',
       desc: '在轻松自在的氛围中，拍下属于你们一家人之间的温暖与牵绊。',
       details: [
         '适合家庭成员合影（最多6人）',

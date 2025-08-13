@@ -11,7 +11,7 @@ import {
   } from 'recharts';
   
  
-  export default function MonthlyCompletedLineChart() {
+  export default function MonthlyRevenueLineChart() {
 
     
       const {data: statsData, isLoading, error} = YearlyCompletedTotal()
@@ -22,7 +22,7 @@ import {
 
     return (
       <div className="w-full md:pr-4 h-80 mb-10">
-        <h2 className="text-xl font-semibold mb-4 p-2">Total Completed (Last 12 Months)</h2>
+        <h2 className="text-xl font-semibold mb-4 p-2">Total Revenue (Last 12 Months)</h2>
         <ResponsiveContainer>
           <LineChart data={statsData}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -31,7 +31,7 @@ import {
             <Tooltip />
             <Line
               type="monotone"
-              dataKey="total"
+              dataKey="totalConfirmedFee"
               stroke="#8884d8"
               strokeWidth={2}
               dot={{ r: 4 }}

@@ -9,6 +9,7 @@ import Dashboard from './modules/admin/pages/Dashboard';
 import ManageBooking from './modules/admin/pages/ManageBooking';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './lib/queryClient';
+import EditBooking from './modules/admin/pages/EditBooking';
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
         <Route path='/admin' element={<AdminLayout/>}>
           <Route index element={<Dashboard/>}/>
           <Route path='managebooking' element={<ManageBooking/>}/>
-
+          <Route path='managebooking/:bookingId/edit' element={<EditBooking/>}/>
         </Route>
 
       </Routes>
