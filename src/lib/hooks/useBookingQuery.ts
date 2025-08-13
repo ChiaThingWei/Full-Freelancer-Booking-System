@@ -1,6 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchAllBookings, fetchBookingsByStatusPaginated, fetchLatestBookingsByStatus, getLast12MonthsCompletedTotals, getLast12MonthsServiceTotals, getMonthlyBookingStats } from '@/lib/api/booking';
+import { fetchAllBookings, fetchBookingById, fetchBookingsByStatusPaginated, fetchLatestBookingsByStatus, getLast12MonthsCompletedTotals, getLast12MonthsServiceTotals, getMonthlyBookingStats, updateBooking } from '@/lib/api/booking';
 import { fetchBookingsByStatus } from '@/lib/api/booking';
+import { useMutation,useQueryClient } from '@tanstack/react-query';
+
+type Booking = {
+  id: number
+  name: string
+  phone: string
+  email: string
+  date: string
+  time: string
+  status: string
+  confirmedFee: number
+}
 
 export const useBookingQuery = () => {
   return useQuery({
@@ -14,6 +26,14 @@ export const useBookingByStatus  = (status:string) => {
   return useQuery({
     queryKey: ['bookings', status], 
     queryFn: () => fetchBookingsByStatus(status),
+    staleTime: 1000 * 60 * 5,
+  })
+}
+
+export const useBookingById  = (id:number) => {
+  return useQuery({
+    queryKey: ['bookings', id], 
+    queryFn: () => fetchBookingById(id),
     staleTime: 1000 * 60 * 5,
   })
 }
@@ -63,16 +83,33 @@ export function YearlyCompletedTotal() {
      queryFn: getLast12MonthsCompletedTotals,
    })
  }
- 
 
+
+//manage booking page show data
  export const useBookingsByStatusPaginated = (
   status: string,
   page: number,
   pageSize: number
 ) => {
   return useQuery({
-    queryKey: ['bookings', status, page, pageSize], // key 要包含依赖条件
+    queryKey: ['bookings', status, page, pageSize],
     queryFn: () => fetchBookingsByStatusPaginated(status, page, pageSize),
-    staleTime: 1000 * 60, // 1 分钟内不重新请求
+    staleTime: 1000 * 60, 
+  })
+}
+
+//edit/update booking data
+
+export const useUpdateBooking = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id, updates }: { id: number; updates: Partial<Booking> }) =>
+      updateBooking(id, updates),
+    onSuccess: () => {
+    
+      queryClient.invalidateQueries({ queryKey: ["bookings"] });
+      queryClient.invalidateQueries({ queryKey: ["booking"] });
+    },
   });
 };

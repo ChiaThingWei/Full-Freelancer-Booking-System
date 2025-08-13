@@ -1,5 +1,17 @@
 import { supabase } from '@/lib/supabaseClient'
 
+type Booking = {
+  id: number
+  name: string
+  phone: string
+  email: string
+  date: string
+  time: string
+  status: string
+  confirmedFee: number
+}
+
+
 //Show all booking without any status
 export const fetchAllBookings = async () => {
   const { data, error } = await supabase
@@ -10,6 +22,18 @@ export const fetchAllBookings = async () => {
   if (error) throw new Error(error.message);
   return data;
 }
+
+// edit page use id call back data
+export const fetchBookingById = async (id: number) => {
+  const { data, error } = await supabase
+    .from('bookings')
+    .select('*')
+    .eq('id', id) 
+    .single()
+
+  if (error) throw new Error(error.message);
+  return data;
+};
 
 //Dashboard use to show latest upcoming appointment with limit
 export const fetchLatestBookingsByStatus = async (status: string, limit: number) => {
@@ -233,3 +257,17 @@ export async function getLast12MonthsCompletedTotals() {
 
   return result
 }
+
+//////////edit, update data
+
+export const updateBooking = async (id: number, updates: Partial<Booking>) => {
+  const { data, error } = await supabase
+    .from("bookings")
+    .update(updates)
+    .eq("id", id)
+    .select();
+
+      console.log('success')
+  if (error) throw new Error(error.message);
+  return data;
+};
