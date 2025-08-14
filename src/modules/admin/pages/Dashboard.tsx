@@ -19,7 +19,7 @@ const Dashboard = () => {
   return (
     <div>
         <h1 className='p-2 font-semibold text-xl mb-4'>Admin Dashboard</h1>
-        <div className='grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-5 lg:grid-cols-4'>
+        <div className='bg-white p-4 rounded-xl grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-5 lg:grid-cols-4'>
 
             <Card title="Summary"  
               bgColor="bg-blue-200"
@@ -54,27 +54,25 @@ const Dashboard = () => {
              />
         </div>
 
-        <div className="border-y-2 my-4 border-gray-300">
+        <div className=" my-4 border-gray-300">
             <p className="pl-2 font-semibold  text-xl my-4">Upcoming Bookings</p>
             <UpcomingBookingCard/>
         </div>
 
-        <div className="lg:flex mb-20">
+        <div className="lg:flex mb-10">
           
-          <div className="bg-white rounded flex px-6 py-10 justify-center lg:w-1/2">
+          <div className="bg-white rounded-xl shadow-md flex px-6 py-10 justify-center lg:w-1/2">
           <MonthlyRevenueLineChart/>
           </div>
 
-          <div className="lg:w-1/2 bg-white md:ml-2 mt-4 md:mt-0 px-6 py-10  rounded">
+          <div className="lg:w-1/2 bg-white md:ml-2 mt-4 md:mt-0 px-6 py-10  rounded-xl shadow-md">
           <MonthlyCompletedLineChart/>
           </div>
         </div>
 
-        <div className="mb-20">
-         
-        </div>
+      
 
-        <div className="mb-20">
+        <div className="mb-20 md:w-1/2   bg-white p-10  rounded-xl shadow-md">
           <DistributionChart/>
         </div>
 

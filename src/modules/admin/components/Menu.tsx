@@ -29,6 +29,7 @@ const Menu = ({ setStatusFilter, active }: MenuProps) => {
     { label: 'Upcoming', value: 'confirmed' },
     { label: 'Done Shooting', value: 'shooting_done' },
     { label: 'Completed', value: 'completed' },
+    { label: 'Cancelled', value: 'cancelled' },
   ]
 
   return (

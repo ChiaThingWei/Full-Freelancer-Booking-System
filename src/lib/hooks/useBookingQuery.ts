@@ -1,18 +1,19 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, keepPreviousData } from '@tanstack/react-query'
 import { fetchAllBookings, fetchBookingById, fetchBookingsByStatusPaginated, fetchLatestBookingsByStatus, getLast12MonthsCompletedTotals, getLast12MonthsServiceTotals, getMonthlyBookingStats, updateBooking } from '@/lib/api/booking';
-import { fetchBookingsByStatus } from '@/lib/api/booking';
-import { useMutation,useQueryClient } from '@tanstack/react-query';
+import { fetchBookingsByStatus } from '@/lib/api/booking'
+import { useMutation,useQueryClient } from '@tanstack/react-query'
+import Booking from '@/modules/app/pages/Booking';
 
-type Booking = {
-  id: number
-  name: string
-  phone: string
-  email: string
-  date: string
-  time: string
-  status: string
-  confirmedFee: number
-}
+// type Booking = {
+//   id: number
+//   name: string
+//   phone: string
+//   email: string
+//   date: string
+//   time: string
+//   status: string
+//   confirmedFee: number
+// }
 
 export const useBookingQuery = () => {
   return useQuery({
@@ -86,15 +87,32 @@ export function YearlyCompletedTotal() {
 
 
 //manage booking page show data
- export const useBookingsByStatusPaginated = (
+//  export const useBookingsByStatusPaginated = (
+//   status: string,
+//   page: number,
+//   pageSize: number,
+//   searchQuery?: string
+// ) => {
+//   return useQuery<>({
+//     queryKey: ['bookings', status, page, pageSize, searchQuery],
+//     queryFn: () => fetchBookingsByStatusPaginated(status, page, pageSize, searchQuery),
+//     staleTime: 1000 * 60, 
+//     keepPreviousData: true, 
+//   })
+// }
+export const useBookingsByStatusPaginated = (
   status: string,
   page: number,
-  pageSize: number
+  pageSize: number,
+  searchQuery?: string
 ) => {
   return useQuery({
-    queryKey: ['bookings', status, page, pageSize],
-    queryFn: () => fetchBookingsByStatusPaginated(status, page, pageSize),
-    staleTime: 1000 * 60, 
+    queryKey: ['bookings', status, page, pageSize, searchQuery],
+    queryFn: () => fetchBookingsByStatusPaginated(status, page, pageSize, searchQuery),
+    staleTime: 1000 * 60,
+    placeholderData: keepPreviousData,
+    // // @ts-expect-error TS 类型可能报错，但运行没问题
+    // keepPreviousData: true,
   })
 }
 
@@ -104,12 +122,12 @@ export const useUpdateBooking = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, updates }: { id: number; updates: Partial<Booking> }) =>
+    mutationFn: ({ id, updates }: { id: number; updates: Partial<typeof Booking> }) =>
       updateBooking(id, updates),
-    onSuccess: () => {
+    onSuccess: (_,{id}) => {
     
       queryClient.invalidateQueries({ queryKey: ["bookings"] });
-      queryClient.invalidateQueries({ queryKey: ["booking"] });
+      queryClient.invalidateQueries({ queryKey: ["booking",id] });
     },
   });
 };

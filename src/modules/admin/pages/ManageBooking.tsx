@@ -1,19 +1,42 @@
 import { useBookingFilterStore, useBookingPaginationStore } from "@/lib/store/bookingFilterStore"
-import BookingCard from "../components/BookingCard"
+// import BookingCard from "../components/BookingCard"
 import Menu from "../components/Menu"
 import { useBookingsByStatusPaginated } from "@/lib/hooks/useBookingQuery"
 import DataTable from "../components/DataTable"
+import { useState, useEffect, useRef } from "react"
+import {debounce} from 'lodash'
+import { Search } from "lucide-react"
 
 
 const ManageBooking = () => {
 
-  // const [page, setPage] = useState(1)
-  // const [limit, setLimit] = useState(5);
   const {page, setPage, limit,setLimit} = useBookingPaginationStore()
   const {statusFilter, setStatusFilter} = useBookingFilterStore()
-  const {data:paginatedData, isLoading: isPageLoading, error: isPageError} = useBookingsByStatusPaginated(statusFilter,page,limit)
- 
+  const [searchQuery, setSearchQuery] = useState('')
+  const [searchInput, setSearchInput] = useState('')
+  const {data:paginatedData = [], isLoading: isPageLoading, error: isPageError} = useBookingsByStatusPaginated(statusFilter,page,limit,searchQuery)
+
+  const debouncedRef = useRef(
+    debounce((val: string, setSearchQuery: (v: string) => void, setPage: (v: number) => void) => {
+      setSearchQuery(val);
+      setPage(1);
+    }, 500)
+  );
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchInput(e.target.value);
+    debouncedRef.current(e.target.value, setSearchQuery, setPage);
+  };
+
+  useEffect(() => {
+    const currentDebounce = debouncedRef.current
   
+    return () => {
+      currentDebounce.cancel()
+    };
+  }, [])
+  
+
     if (isPageLoading) return <p>Loading...</p>;
     if (isPageError) return <p>Something went wrong</p>;
 
@@ -21,8 +44,21 @@ const ManageBooking = () => {
     <div className="w-full lg:block ">
        <h1 className='p-2 font-semibold text-xl mb-4'>Manage Booking</h1>
        
-        <div className="">
+        <div className="flex flex-col">
           <Menu setStatusFilter={setStatusFilter} active={statusFilter} />
+         
+        </div>
+
+        <div className="flex flex-row  w-2/3 md:w-1/2 bg-white p-3 rounded-xl">
+        <Search className="my-auto size-7 text-blue-300" strokeWidth={3}/>
+        <input
+            type="text"
+            placeholder="Search by name, email, phone..."
+            value={searchInput}
+            onChange={handleSearchChange}
+            className=" p-3 ml-3 w-full  bg-gray-100 rounded-xl"
+          />
+       
         </div>
 
       <div className="mt-4 w-full">
@@ -62,7 +98,7 @@ const ManageBooking = () => {
         <span className="my-auto mx-2">{page}</span>
         <button
           onClick={() => setPage(page + 1)}
-          disabled={!paginatedData || paginatedData.length < limit} 
+          disabled={paginatedData.length < limit}
           className="border px-3 py-1 rounded disabled:opacity-50 disabled:cursor-auto cursor-pointer"
         >
           Next

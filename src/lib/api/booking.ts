@@ -1,14 +1,27 @@
 import { supabase } from '@/lib/supabaseClient'
 
-type Booking = {
-  id: number
-  name: string
-  phone: string
-  email: string
-  date: string
-  time: string
-  status: string
+// type Booking = {
+//   id: number
+//   name: string
+//   phone: string
+//   email: string
+//   date: string
+//   time: string
+//   status: string
+//   confirmedFee: number
+// }
+
+export interface Booking {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  date: string;
+  time: string;
+  status: string;
   confirmedFee: number
+  created_at: string;
 }
 
 
@@ -84,7 +97,8 @@ export const fetchBookingsByStatus = async (status: string) => {
 export const fetchBookingsByStatusPaginated = async (
   status: string,
   page: number,
-  pageSize: number
+  pageSize: number,
+  searchQuery?: string
 ) => {
   const from = (page - 1) * pageSize;
   const to = from + pageSize - 1;
@@ -100,7 +114,16 @@ export const fetchBookingsByStatusPaginated = async (
     query = query.eq('status', status);
   }
 
+  if (searchQuery) {
+    console.log('searching...')
+    query = query.or(
+      `name.ilike.%${searchQuery}%,phone.ilike.%${searchQuery}%,email.ilike.%${searchQuery}%,service.ilike.%${searchQuery}%`
+    )
+   
+  }
+ 
   const { data, error } = await query;
+  console.log(data)
 
   if (error) throw new Error(error.message);
   return data;

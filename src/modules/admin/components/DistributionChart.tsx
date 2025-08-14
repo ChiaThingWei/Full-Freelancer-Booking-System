@@ -24,9 +24,9 @@ const DistributionChart = () => {
   if (error) return <div>Failed to load</div>;
 
    return (
-    <div className="w-full md:w-1/2 h-80">
-      <h2 className="text-xl font-semibold p-2">Distribution of Service Types (Last 12 Months)</h2>
-      <p className='pl-2 pb-2 '>From {dayjs(statsData?.startDate).format('YYYY-MM-DD')}</p>
+    <div className="w-full ">
+      <h2 className="text-xl font-semibold pb-2">Distribution of Service Types (Last 12 Months)</h2>
+      <p className=' pb-2 '>From {dayjs(statsData?.startDate).format('YYYY-MM-DD')}</p>
       
       
       <div className='mx-auto  h-80'>
