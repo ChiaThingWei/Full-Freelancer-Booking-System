@@ -5,12 +5,13 @@ import DistributionChart from "../components/DistributionChart"
 import MonthlyCompletedLineChart from "../components/LineChart"
 import UpcomingBookingCard from "../components/UpcomingBookingCard"
 import MonthlyRevenueLineChart from "../components/RevenueLineChart"
-
+import { useNavigate } from "react-router-dom"
 
 
 const Dashboard = () => {
 
   const { data, isLoading, error } = useMonthlyBookingStats()
+  const navigate = useNavigate()
 
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Error loading stats</div>
@@ -34,15 +35,19 @@ const Dashboard = () => {
               data4={data?.byStatus['completed'] || 0}
               />
 
-            <Card2 title="Pending Approvals" 
-              data={data?.totalPending || 0}  
-              subtitle="Please confirm as soon as possible"
-              bgColor="bg-red-300" 
-             />
+      
+              <Card2 title="Pending Approvals" 
+                data={data?.totalPending || 0}  
+                subtitle="Please confirm as soon as possible"
+                bgColor="bg-red-300" 
+                onClick={() => navigate('/admin/managebooking?tab=pending')}
+              />
+           
 
             <Card2 title="Pending Photo Delivery" 
               data={data?.totalShootingDone || 0}  
               subtitle="Shoots completed but photos not delivered" 
+              onClick={() => navigate('/admin/managebooking?tab=shooting_done')}
                />
             <Card title="Revenue (in RM)" 
              data1={data?.estimatedRevenue || 0}  
@@ -54,13 +59,13 @@ const Dashboard = () => {
              />
         </div>
 
-        <div className=" my-4 border-gray-300">
-            <p className="pl-2 font-semibold  text-xl my-4">Upcoming Bookings</p>
+        <div className=" my-8 border-gray-300">
+            <p className="pl-4 font-semibold  text-xl mt-4">Calender</p>
             <UpcomingBookingCard/>
         </div>
 
-        <div className="lg:flex mb-10">
-          
+        <p className="pl-4 font-semibold  text-xl mt-4 mb-6">Statistic</p>
+        <div className="lg:flex mb-4">
           <div className="bg-white rounded-xl shadow-md flex px-6 py-10 justify-center lg:w-1/2">
           <MonthlyRevenueLineChart/>
           </div>

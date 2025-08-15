@@ -12,6 +12,7 @@ import {
 
 import { SlidersHorizontal } from "lucide-react"
 import { useBookingPaginationStore } from '@/lib/store/bookingFilterStore'
+import { useBookingsCounts } from '@/lib/hooks/useBookingQuery'
 
 interface MenuProps {
   setStatusFilter: (status: string) => void
@@ -22,6 +23,9 @@ interface MenuProps {
 const Menu = ({ setStatusFilter, active }: MenuProps) => {
 
   const {setPage} = useBookingPaginationStore()
+  const { data: counts } = useBookingsCounts() 
+
+  console.log(counts)
 
   const options = [
     { label: 'All', value: 'all' },
@@ -55,15 +59,24 @@ const Menu = ({ setStatusFilter, active }: MenuProps) => {
             {/* <DrawerDescription>This action cannot be undone.</DrawerDescription> */}
           </DrawerHeader>
          <DrawerClose>
-          {options.map(({ label, value }) => (
+          {options.map(({ label, value }) => {
+            
+            // let count = 0;
+            // if (value === 'pending') count = counts?.pending || 0;
+            // if (value === 'confirmed') count = counts?.confirmed || 0;
+            // if (value === 'completed') count = counts?.completed || 0;
+            // if (value === 'shooting_done') count = counts?.shooting_done || 0;
+            // if (value === 'cancelled') count = counts?.cancelled || 0;
+            // if (value === 'all') count = counts?.all || 0;
 
 
+            return(
               <button
               key={value}
               onClick={() => {
                 setStatusFilter(value); 
                 setPage(1)}}
-
+                
               className={`
                 ${active === value ? 'border-1 border-gray-500':''}
                 w-full text-xl text-start cursor-pointer rounded-lg px-3 py-2 `}
@@ -79,14 +92,14 @@ const Menu = ({ setStatusFilter, active }: MenuProps) => {
                           )}
                    </div>
                   
-                  <p className="ml-4">{label}</p>
+                  <p className="ml-4">{label} ({counts?.[value as 'all'|'pending'|'confirmed'|'cancelled'|'shooting_done'|'completed'] ?? 0})</p>
 
                 </div>
                 
             </button>
 
-            
-          ))}
+                        )
+})}
           </DrawerClose>
      
 
@@ -104,6 +117,14 @@ const Menu = ({ setStatusFilter, active }: MenuProps) => {
       <div className="hidden lg:flex flex-row gap-3 justify-evenly bg-white px-4 py-2 rounded-lg">
         {options.map(({ label, value }) => {
 
+          // let count = 0;
+          // if (value === 'pending') count = counts?.pending || 0;
+          // if (value === 'confirmed') count = counts?.confirmed || 0;
+          // if (value === 'completed') count = counts?.completed || 0;
+          // if (value === 'shooting_done') count = counts?.shooting_done || 0;
+          // if (value === 'cancelled') count = counts?.cancelled || 0;
+          // if (value === 'all') count = counts?.all || 0;
+
           return(
             <button
               key={value}
@@ -120,7 +141,7 @@ const Menu = ({ setStatusFilter, active }: MenuProps) => {
             />
             
             )}
-            <span className="relative z-20">{label}</span>
+            <span className="relative z-20">{label} ({counts?.[value as 'all'|'pending'|'confirmed'|'cancelled'|'shooting_done'|'completed'] ?? 0})</span>
           </button>
           )
 })}

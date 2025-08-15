@@ -1,16 +1,5 @@
 import { supabase } from '@/lib/supabaseClient'
 
-// type Booking = {
-//   id: number
-//   name: string
-//   phone: string
-//   email: string
-//   date: string
-//   time: string
-//   status: string
-//   confirmedFee: number
-// }
-
 export interface Booking {
   id: number;
   name: string;
@@ -74,26 +63,19 @@ export const fetchBookingsByStatus = async (status: string) => {
   return data
 }
 
-// use to show booking with page and limit
-// export const fetchBookingsByStatusPaginated = async (
-//   status: string,
-//   page: number,
-//   pageSize: number
-// ) => {
-//   const from = (page - 1) * pageSize;
-//   const to = from + pageSize - 1;
+// use to show booking with many status
+export const fetchBookingsByStatuses = async (statuses: string[]) => {
+  const { data, error } = await supabase
+    .from('bookings')
+    .select('*')
+    .in('status', statuses)
+    .order('created_at', { ascending: false });
 
-//   const { data, error } = await supabase
-//     .from('bookings')
-//     .select('*')
-//     .eq('status', status)
-//     .order('created_at', { ascending: false })
-//     .range(from, to);
+  if (error) throw new Error(error.message);
+  return data;
+}
 
-//   if (error) throw new Error(error.message);
-//   return data;
-// }
-
+//manage booking use to show paginated booking by status
 export const fetchBookingsByStatusPaginated = async (
   status: string,
   page: number,
@@ -127,6 +109,29 @@ export const fetchBookingsByStatusPaginated = async (
 
   if (error) throw new Error(error.message);
   return data;
+}
+
+// use to show booking counts by status
+export const fetchBookingsCounts = async (): Promise<Record<'all'|'pending'|'confirmed'|'cancelled'|'shooting_done'|'completed', number>> => {
+  // 聚合查询：按 status 计数
+  const { data, error } = await supabase
+    .from('bookings')
+    .select('status', { count: 'exact' });
+
+  if (error) throw new Error(error.message);
+
+  // 汇总各状态数量
+  const counts = { pending: 0, confirmed: 0,  completed: 0,all: 0 , cancelled: 0, shooting_done: 0 };
+  data?.forEach((item) => {
+    counts.all += 1
+    if (item.status === 'pending') counts.pending += 1
+    if (item.status === 'confirmed') counts.confirmed += 1
+    if (item.status === 'shooting_done') counts.shooting_done += 1
+    if (item.status === 'completed') counts.completed += 1
+    if (item.status === 'cancelled') counts.cancelled += 1
+  });
+  console.log(counts)
+  return counts;
 };
 
 
@@ -281,8 +286,7 @@ export async function getLast12MonthsCompletedTotals() {
   return result
 }
 
-//////////edit, update data
-
+//////////edit, update data////////////////
 export const updateBooking = async (id: number, updates: Partial<Booking>) => {
   const { data, error } = await supabase
     .from("bookings")

@@ -1,19 +1,22 @@
 import type { ReactNode } from 'react'
 
 type CardProps = {
-  title: string;
-  data: number;
-  data1?: number;
-  icon?: ReactNode;
-  subtitle?: string;
-  subtitle1?: string;
-  subtitle2?: string;
-  bgColor?: string; 
+  title: string
+  data: number
+  data1?: number
+  icon?: ReactNode
+  subtitle?: string
+  subtitle1?: string
+  subtitle2?: string
+  bgColor?: string
+  onClick?: () => void
 }
 
-const Card2 = ({title,data,subtitle, bgColor = ''}: CardProps) => {
+const Card2 = ({title,data,subtitle, bgColor = '',onClick}: CardProps) => {
     return (
-      <div className={` ${bgColor} text-gray-800 flex justify-between hover:scale-105 transition-transform duration-300 bg-gray-300 flex-col  p-3 rounded-xl overflow-hidden `}>
+      <div
+      onClick={onClick} 
+      className={` ${bgColor} text-gray-800 cursor-pointer flex justify-between hover:scale-105 transition-transform duration-300 bg-gray-300 flex-col  p-3 rounded-xl overflow-hidden `}>
    
        
           <div className='flex flex-col h-1/2'>

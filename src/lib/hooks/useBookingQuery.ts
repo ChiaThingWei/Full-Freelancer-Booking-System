@@ -1,5 +1,5 @@
 import { useQuery, keepPreviousData } from '@tanstack/react-query'
-import { fetchAllBookings, fetchBookingById, fetchBookingsByStatusPaginated, fetchLatestBookingsByStatus, getLast12MonthsCompletedTotals, getLast12MonthsServiceTotals, getMonthlyBookingStats, updateBooking } from '@/lib/api/booking';
+import { fetchAllBookings, fetchBookingById, fetchBookingsByStatuses, fetchBookingsByStatusPaginated, fetchBookingsCounts, fetchLatestBookingsByStatus, getLast12MonthsCompletedTotals, getLast12MonthsServiceTotals, getMonthlyBookingStats, updateBooking } from '@/lib/api/booking';
 import { fetchBookingsByStatus } from '@/lib/api/booking'
 import { useMutation,useQueryClient } from '@tanstack/react-query'
 import Booking from '@/modules/app/pages/Booking';
@@ -23,6 +23,7 @@ export const useBookingQuery = () => {
   })
 }
 
+// Fetch bookings by status
 export const useBookingByStatus  = (status:string) => {
   return useQuery({
     queryKey: ['bookings', status], 
@@ -31,6 +32,15 @@ export const useBookingByStatus  = (status:string) => {
   })
 }
 
+// Fetch bookings by multiple statuses
+export const useBookingsByStatuses = (statuses: string[]) => {
+  return useQuery({
+    queryKey: ['bookings', statuses],
+    queryFn: () => fetchBookingsByStatuses(statuses),
+    staleTime: 1000 * 60 * 5,
+  });
+};
+
 export const useBookingById  = (id:number) => {
   return useQuery({
     queryKey: ['bookings', id], 
@@ -38,6 +48,7 @@ export const useBookingById  = (id:number) => {
     staleTime: 1000 * 60 * 5,
   })
 }
+
 
 export const useConfirmedBookingByLimit = (status:string , limit:number)=>{
 
@@ -49,6 +60,17 @@ export const useConfirmedBookingByLimit = (status:string , limit:number)=>{
 
 }
 
+
+export const useBookingsCounts = () => {
+
+  return useQuery({
+    queryKey:['bookingsCounts'],
+    queryFn: ()=> fetchBookingsCounts(),
+    staleTime: 1000 * 60 * 5,
+  })
+
+ 
+};
 
 // export const useBookingTotalByStatus = (status:string , limit:number)=>{
 
@@ -87,19 +109,7 @@ export function YearlyCompletedTotal() {
 
 
 //manage booking page show data
-//  export const useBookingsByStatusPaginated = (
-//   status: string,
-//   page: number,
-//   pageSize: number,
-//   searchQuery?: string
-// ) => {
-//   return useQuery<>({
-//     queryKey: ['bookings', status, page, pageSize, searchQuery],
-//     queryFn: () => fetchBookingsByStatusPaginated(status, page, pageSize, searchQuery),
-//     staleTime: 1000 * 60, 
-//     keepPreviousData: true, 
-//   })
-// }
+
 export const useBookingsByStatusPaginated = (
   status: string,
   page: number,
@@ -111,13 +121,11 @@ export const useBookingsByStatusPaginated = (
     queryFn: () => fetchBookingsByStatusPaginated(status, page, pageSize, searchQuery),
     staleTime: 1000 * 60,
     placeholderData: keepPreviousData,
-    // // @ts-expect-error TS 类型可能报错，但运行没问题
-    // keepPreviousData: true,
   })
 }
 
-//edit/update booking data
 
+//edit/update booking data
 export const useUpdateBooking = () => {
   const queryClient = useQueryClient();
 

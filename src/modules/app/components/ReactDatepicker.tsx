@@ -16,11 +16,18 @@ export default function BookingDatePicker({ selectedDate, setSelectedDate }: Pro
       
       <DatePicker
         selected={selectedDate}
+        // onChange={(date: Date | null) => {
+        //     if (date) {
+        //       setSelectedDate(date);
+        //     }
+        //   }}
         onChange={(date: Date | null) => {
-            if (date) {
-              setSelectedDate(date);
-            }
-          }}
+          if (date) {
+            const fixedDate = new Date(date);
+            fixedDate.setHours(12); 
+            setSelectedDate(fixedDate);
+          }
+        }}
         minDate={new Date()}
         placeholderText="选择日期"
         className="border-2 border-gray-300 bg-green-300 p-2 w-full rounded"

@@ -19,17 +19,17 @@ const AdminLayout = () => {
       {/* Sidebar */}
       <div className={`fixed z-50 md:static md:translate-x-0 transition-transform duration-200
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} 
-        w-64 bg-gray-700 text-white p-4 h-full`}>
+        w-60 bg-gray-700 text-white p-4 h-full`}>
         <h1 className="text-xl font-bold mb-4">Admin Panel</h1>
         <ul className="space-y-2">
         <a href="/admin">
-  <li className='flex flex-row cursor-pointer hover:bg-gray-700 rounded-full py-2 px-1 transition-colors duration-200'>
+  <li className='flex flex-row cursor-pointer hover:bg-gray-500 rounded-full py-2 px-1 transition-colors duration-300'>
     <RiDashboard2Line className='ml-1 my-auto'/>
     <span className="ml-4 block">Dashboard</span>
   </li>
 </a>
 <a href="/admin/managebooking">
-  <li className='flex flex-row cursor-pointer hover:bg-gray-700 rounded-full py-2 px-1 transition-colors duration-200'>
+  <li className='flex flex-row cursor-pointer hover:bg-gray-500 rounded-full py-2 px-1 transition-colors duration-300'>
     <RiDatabase2Line className='ml-1 my-auto'/>
     <span className="ml-4 block">Manage Bookings</span>
   </li>

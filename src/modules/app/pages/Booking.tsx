@@ -7,7 +7,7 @@ import toast from 'react-hot-toast';
 
 const Booking = () => {
 
-  
+
     const slots = ['9:00', '12:00', '15:00','18:00','21:00'];
 
     const [selectedSlot, setSelectedSlot] = useState('');
@@ -185,7 +185,7 @@ const Booking = () => {
                     key={index}
                     onClick={() => setService(srv.service)}
                     className={`flex flex-row justify-between border-2 border-gray-300 items-center bg-white rounded p-6 cursor-pointer hover:scale-105 transition-transform duration-300 ${
-                      service === srv.title ? 'ring-2 ring-green-300' : ''
+                      service === srv.service ? 'ring-2 ring-green-300' : ''
                     }`}
                   >
 
@@ -196,9 +196,9 @@ const Booking = () => {
         
 
                         <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                        service === srv.title ? 'border-green-500' : 'border-gray-300'
+                        service === srv.service  ? 'border-green-500' : 'border-gray-300'
                         }`}>
-                        {service === srv.title && (
+                        {service === srv.service  && (
                             <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
                         )}
                         </div>

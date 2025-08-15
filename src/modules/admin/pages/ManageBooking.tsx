@@ -6,6 +6,7 @@ import DataTable from "../components/DataTable"
 import { useState, useEffect, useRef } from "react"
 import {debounce} from 'lodash'
 import { Search } from "lucide-react"
+import { useLocation } from "react-router-dom"
 
 
 const ManageBooking = () => {
@@ -15,6 +16,14 @@ const ManageBooking = () => {
   const [searchQuery, setSearchQuery] = useState('')
   const [searchInput, setSearchInput] = useState('')
   const {data:paginatedData = [], isLoading: isPageLoading, error: isPageError} = useBookingsByStatusPaginated(statusFilter,page,limit,searchQuery)
+  const location = useLocation();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const tab = searchParams.get('tab') || 'all';
+    setStatusFilter(tab);
+  }, [location.search, setStatusFilter]);
+  
 
   const debouncedRef = useRef(
     debounce((val: string, setSearchQuery: (v: string) => void, setPage: (v: number) => void) => {
