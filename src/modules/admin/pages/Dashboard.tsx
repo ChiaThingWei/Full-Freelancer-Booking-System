@@ -65,21 +65,26 @@ const Dashboard = () => {
         </div>
 
         <p className="pl-4 font-semibold  text-xl mt-4 mb-6">Statistic</p>
-        <div className="lg:flex mb-4">
-          <div className="bg-white rounded-xl shadow-md flex px-6 py-10 justify-center lg:w-1/2">
+
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 mb-4">
+          {/* <div className="bg-white rounded-xl shadow-sm flex pl-2 pr-6 pb-10 justify-center ">
           <MonthlyRevenueLineChart/>
-          </div>
-
-          <div className="lg:w-1/2 bg-white md:ml-2 mt-4 md:mt-0 px-6 py-10  rounded-xl shadow-md">
+          </div> */}
+           
+          <MonthlyRevenueLineChart/>
           <MonthlyCompletedLineChart/>
-          </div>
-        </div>
-
-      
-
-        <div className="mb-20 md:w-1/2   bg-white p-10  rounded-xl shadow-md">
           <DistributionChart/>
+          {/* <div className=" bg-white mt-4 md:mt-0 pl-2 pr-6 pb-10 justify-center rounded-xl shadow-sm">
+          <MonthlyCompletedLineChart/>
+          </div> */}
+
+          {/* <div className="mb-20  mt-4 lg:mt-0 bg-white p-2 rounded-xl shadow-sm">
+          <DistributionChart/>
+        </div> */}
         </div>
+
+        
 
         
 

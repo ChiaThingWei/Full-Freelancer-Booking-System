@@ -21,9 +21,12 @@ import {
       if (error) return <div>Failed to load</div>;
 
     return (
-      <div className="w-full md:pr-4 h-80 mb-10">
-        <h2 className="text-xl font-semibold mb-4 p-2">Total Revenue (Last 12 Months)</h2>
-        <ResponsiveContainer>
+      <div className="w-full  h-[500px]  bg-white rounded-xl shadow-sm md:pr-4 pb-10  mb-10 lg:mb-0">
+        <h2 className="text-xl font-semibold mb-10 p-4">Total Revenue 
+          <span className=' text-sm text-gray-400'><br/>Last 12 months</span>
+        </h2>
+        <div className='pr-6'>
+        <ResponsiveContainer height={300}>
           <LineChart data={statsData}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="month" />
@@ -39,6 +42,7 @@ import {
             />
           </LineChart>
         </ResponsiveContainer>
+        </div>
       </div>
     );
   }

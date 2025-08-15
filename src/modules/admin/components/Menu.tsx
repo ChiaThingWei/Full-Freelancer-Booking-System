@@ -42,7 +42,7 @@ const Menu = ({ setStatusFilter, active }: MenuProps) => {
     <div className="my-4 w-full">
       
       <div>
-      <div className="lg:hidden bg-white w-1/3 px-4 py-2 rounded-lg shadow-sm">
+      <div className="lg:hidden bg-white w-1/3 px-4 py-2 rounded-lg ">
        
           <Drawer>
         <DrawerTrigger> 
@@ -114,7 +114,7 @@ const Menu = ({ setStatusFilter, active }: MenuProps) => {
         
       </div>
   
-      <div className="hidden lg:flex flex-row gap-3 justify-evenly bg-white px-4 py-2 rounded-lg">
+      <div className="hidden lg:flex flex-row gap-3 justify-evenly bg-white shadow-sm px-4 py-2 rounded-lg">
         {options.map(({ label, value }) => {
 
           // let count = 0;
@@ -129,19 +129,19 @@ const Menu = ({ setStatusFilter, active }: MenuProps) => {
             <button
               key={value}
               onClick={() => {setStatusFilter(value); setPage(1);}}
-              className="relative z-10 px-4 py-1 cursor-pointer transition-colors duration-300 rounded-lg"
+              className="relative z-10 px-4 py-2 cursor-pointer transition-colors duration-300 rounded-lg"
             >
 
             {active === value && (
             
             <motion.div
               layoutId='active-pill'
-              className="absolute inset-0 bg-blue-200 rounded-lg"
+              className="absolute inset-0 bg-blue-500 rounded-lg"
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
             />
             
             )}
-            <span className="relative z-20">{label} ({counts?.[value as 'all'|'pending'|'confirmed'|'cancelled'|'shooting_done'|'completed'] ?? 0})</span>
+            <span className={`${active === value ? 'text-white font-semibold':''} relative z-20`}>{label} ({counts?.[value as 'all'|'pending'|'confirmed'|'cancelled'|'shooting_done'|'completed'] ?? 0})</span>
           </button>
           )
 })}

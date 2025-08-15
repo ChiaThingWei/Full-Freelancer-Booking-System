@@ -39,7 +39,7 @@ const DataTable = ({ bookings,tablePage,tablePageSize }: BookingCardProps ) => {
 
   return (
     <div className="mt-6 lg:block ">
-        <table className="w-full bg-white  rounded-xl">
+        <table className="w-full bg-white shadow-sm rounded-xl">
             <thead className="border-b-1 border-gray-300">
                 <tr className="">
                     <th className='p-3 font-semibold'>No.</th>

@@ -58,15 +58,16 @@ const ManageBooking = () => {
          
         </div>
 
-        <div className="flex flex-row  w-2/3 md:w-1/2 bg-white p-3 rounded-xl">
-        <Search className="my-auto size-7 text-blue-300" strokeWidth={3}/>
-        <input
-            type="text"
-            placeholder="Search by name, email, phone..."
-            value={searchInput}
-            onChange={handleSearchChange}
-            className=" p-3 ml-3 w-full  bg-gray-100 rounded-xl"
-          />
+        <div className="flex flex-row shadow-sm w-2/3 md:w-1/2 bg-white p-3 rounded-xl">
+          <Search className="my-auto size-7 text-blue-500" strokeWidth={3}/>
+          <input
+              type="text"
+              placeholder="Search by name, email, phone..."
+              value={searchInput}
+            
+              onChange={handleSearchChange}
+              className=" p-3 ml-3 w-full border-2 bg-gray-100 rounded-xl"
+            />
        
         </div>
 
@@ -75,7 +76,7 @@ const ManageBooking = () => {
         <DataTable bookings={paginatedData || []} tablePage ={page} tablePageSize={limit} />
       </div>
 
-      <div className="p-4 flex w-full flex-row justify-between bg-white rounded-lg mt-4">
+      <div className="p-4 flex w-full flex-row justify-between shadow-sm bg-white rounded-lg mt-4">
       {/* Page size 控制 */}
       <div className="flex items-center gap-2 my-auto">
         <label>Show :</label>

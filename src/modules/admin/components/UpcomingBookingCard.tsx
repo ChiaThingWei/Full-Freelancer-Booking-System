@@ -82,7 +82,7 @@ const UpcomingBookingCard = () => {
       })}
     </div> */}
 
-<div className="md:flex gap-4 p-4 ">
+<div className="md:flex gap-4 py-4 ">
 
     
       <DayPicker
