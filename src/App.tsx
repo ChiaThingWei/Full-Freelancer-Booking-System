@@ -1,7 +1,6 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './modules/app/pages/Home';
-import Booking from './modules/app/pages/Booking';
 import ScrollToTop from './modules/app/components/ScrollToTop';
 import { Toaster } from 'react-hot-toast';
 import AdminLayout from './layout/AdminLayout';
@@ -10,6 +9,7 @@ import ManageBooking from './modules/admin/pages/ManageBooking';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './lib/queryClient';
 import EditBooking from './modules/admin/pages/EditBooking';
+import Register from './modules/app/pages/Register';
 
 function App() {
 
@@ -22,7 +22,7 @@ function App() {
   <QueryClientProvider client={queryClient}>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/booking" element={<Booking />} />
+        <Route path="/register" element={<Register />} />
 
         <Route path='/admin' element={<AdminLayout/>}>
           <Route index element={<Dashboard/>}/>

@@ -9,6 +9,7 @@ export interface Booking {
   date: string;
   time: string;
   status: string;
+  remarks?: string;
   confirmedFee: number
   created_at: string;
 }

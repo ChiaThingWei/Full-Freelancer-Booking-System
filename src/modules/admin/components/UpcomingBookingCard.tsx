@@ -17,7 +17,7 @@ const UpcomingBookingCard = () => {
   //   end: endOfMonth(today)
   // })
 
-  const [selectedDay, setSelectedDay] = useState<Date>();;
+
   
   // 模拟预约数据
   // const appointments = {
@@ -57,7 +57,11 @@ const UpcomingBookingCard = () => {
       return acc
     }, {} as Record<string, { time: string; name: string }[]>) || {}
 
-   
+    // const [selectedDay, setSelectedDay] = useState<Date>()
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const [selectedDay, setSelectedDay] = useState<Date | undefined>(new Date())
+
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Something went wrong</p>;
 
@@ -116,7 +120,7 @@ const UpcomingBookingCard = () => {
               {appointments[format(selectedDay, "yyyy-MM-dd")]?.map((appt, i) => (
                 <li
                   key={i}
-                  className="p-4 shadow-sm rounded-xl border-2 border-slate-900 transition-transform duration-300 hover:scale-105 bg-white"
+                  className="p-4 shadow-sm rounded-xl border-3 border-blue-500 transition-transform duration-300 hover:scale-105 bg-white"
                 >
                   <strong>{appt.time}</strong> - {appt.name}
                 </li>

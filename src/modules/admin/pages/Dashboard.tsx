@@ -6,6 +6,7 @@ import MonthlyCompletedLineChart from "../components/LineChart"
 import UpcomingBookingCard from "../components/UpcomingBookingCard"
 import MonthlyRevenueLineChart from "../components/RevenueLineChart"
 import { useNavigate } from "react-router-dom"
+import Banner from "../components/Banner"
 
 
 const Dashboard = () => {
@@ -19,8 +20,11 @@ const Dashboard = () => {
 
   return (
     <div>
+      
+        <Banner/>
+
         <h1 className='p-2 font-semibold text-xl mb-4'>Admin Dashboard</h1>
-        <div className='bg-white p-4 rounded-xl grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-5 lg:grid-cols-4'>
+        <div className='bg-white p-4 rounded-xl shadow-sm grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-5 lg:grid-cols-4'>
 
             <Card title="Summary"  
               bgColor="bg-blue-200"

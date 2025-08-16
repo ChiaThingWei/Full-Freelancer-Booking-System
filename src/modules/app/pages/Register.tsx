@@ -5,7 +5,7 @@ import { supabase } from '../../../lib/supabaseClient'; // 按路径调整
 import { format } from 'date-fns'
 import toast from 'react-hot-toast';
 
-const Booking = () => {
+const Register = () => {
 
 
     const slots = ['9:00', '12:00', '15:00','18:00','21:00'];
@@ -265,4 +265,4 @@ const Booking = () => {
   )
 }
 
-export default Booking
+export default Register

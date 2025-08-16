@@ -2,7 +2,7 @@ import { useQuery, keepPreviousData } from '@tanstack/react-query'
 import { fetchAllBookings, fetchBookingById, fetchBookingsByStatuses, fetchBookingsByStatusPaginated, fetchBookingsCounts, fetchLatestBookingsByStatus, getLast12MonthsCompletedTotals, getLast12MonthsServiceTotals, getMonthlyBookingStats, updateBooking } from '@/lib/api/booking';
 import { fetchBookingsByStatus } from '@/lib/api/booking'
 import { useMutation,useQueryClient } from '@tanstack/react-query'
-import Booking from '@/modules/app/pages/Booking';
+import Booking from '@/modules/app/pages/Register';
 
 // type Booking = {
 //   id: number

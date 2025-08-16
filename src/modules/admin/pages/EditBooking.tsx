@@ -29,6 +29,7 @@ const EditBooking = () => {
           date: formData.date,
           time: formData.time,
           status: formData.status,
+          remarks: formData.remarks,
           confirmedFee: formData.confirmedFee,
          }
       },
@@ -42,6 +43,7 @@ const EditBooking = () => {
             date: formData.date,
             time: formData.time,
             status: formData.status,
+            remarks: formData.remarks,
             confirmedFee: formData.confirmedFee,
           }));
           toast.success('Update Data Successfully')
@@ -57,6 +59,7 @@ const EditBooking = () => {
     date: "",
     time: "",
     status: "",
+    remarks: "",
     confirmedFee: 0
   })
 
@@ -69,6 +72,7 @@ const EditBooking = () => {
         date: booking.date || "",
         time: booking.time || "",
         status: booking.status || "",
+        remarks: booking.remarks || "",
         confirmedFee: booking.confirmedFee || "",
       })
     }
@@ -179,6 +183,16 @@ const EditBooking = () => {
             </select>
           </div>
 
+        </div>
+
+        <div className='flex flex-col'>
+          <label className='p-2'>Remarks</label>
+          <textarea
+            value={formData.remarks}
+            placeholder={formData.remarks}
+            className='border-2 rounded p-2 h-[100px] bg-white'
+            onChange={(e) => setFormData({ ...formData, remarks: e.target.value })}
+          />
         </div>
 
         <div className='flex flex-row w-full justify-end mt-6'>
