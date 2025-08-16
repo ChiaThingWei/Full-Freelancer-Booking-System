@@ -5,7 +5,7 @@ import { eachDayOfInterval, startOfMonth, endOfMonth, format } from 'date-fns'
 import { useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -53,7 +53,7 @@ const UpcomingBookingCard = () => {
     const appointments = bookings?.reduce((acc, b) => {
       const dateKey = format(new Date(b.date), 'yyyy-MM-dd')
       if (!acc[dateKey]) acc[dateKey] = []
-      acc[dateKey].push({ time: b.time, name: b.name })
+      acc[dateKey].push({ time: b.time, id:b.id, name: b.name, remarks: b.remarks, service:b.service })
       return acc
     }, {} as Record<string, { time: string; name: string }[]>) || {}
 
@@ -61,6 +61,14 @@ const UpcomingBookingCard = () => {
     const today = new Date()
     today.setHours(0, 0, 0, 0)
     const [selectedDay, setSelectedDay] = useState<Date | undefined>(new Date())
+
+
+    
+  const navigate = useNavigate()
+
+  const handleEdit = (bookingId: number)=> {
+    navigate(`managebooking/${bookingId}/edit`, { state: bookingId });
+}
 
     if (isLoading) return <p>Loading...</p>;
     if (error) return <p>Something went wrong</p>;
@@ -116,13 +124,19 @@ const UpcomingBookingCard = () => {
             <h2 className="text-lg font-semibold mb-2">
               {format(selectedDay, "yyyy-MM-dd")}'s Appointments
             </h2>
-            <ul className="space-y-2">
+
+            <ul className="space-y-2 grid grid-cols-2">
               {appointments[format(selectedDay, "yyyy-MM-dd")]?.map((appt, i) => (
                 <li
                   key={i}
-                  className="p-4 shadow-sm rounded-xl border-3 border-blue-500 transition-transform duration-300 hover:scale-105 bg-white"
+                  onClick={()=>handleEdit(appt.id)}
+                  className="p-4 cursor-pointer shadow-sm rounded-xl border-3 border-blue-500 transition-transform duration-300 hover:scale-105 bg-white"
                 >
                   <strong>{appt.time}</strong> - {appt.name}
+                  <br/>( {appt.service} )
+                  <br/> <span className="whitespace-pre-line">{appt.remarks}</span>
+                  
+                  
                 </li>
               )) || <p>No Appointment</p>}
             </ul>

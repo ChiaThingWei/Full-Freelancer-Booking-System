@@ -93,7 +93,7 @@ const Services = () => {
  </div>
 
     <Link 
-      to="/booking"
+      to="/register"
       className="mx-auto mt-4 px-16 py-2 text-gray-500 hover:text-white hover:bg-green-500 border-2 hover:border-green-500 border-gray-300 text-xl transition-colors duration-300 cursor-pointer opacity-80 rounded-full bg-white"
     >
       马上预约

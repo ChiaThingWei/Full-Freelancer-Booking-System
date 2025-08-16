@@ -36,3 +36,22 @@ export const useBookingPaginationStore = create<BookingPaginationState>()(
     { name: 'booking-pagination' } // localStorage key
   )
 );
+
+interface BookingSearchStore{
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
+  searchInput: string;
+  setSearchInput: (input: string) => void;
+}
+
+export const useBookingSearchStore = create<BookingSearchStore>()(
+  persist(  
+    (set) => ({
+      searchQuery: '',
+      setSearchQuery: (query) => set({ searchQuery: query }),
+      searchInput: '',
+      setSearchInput: (input) => set({ searchInput: input }), 
+    }),
+    { name: 'booking-search' } // localStorage key
+  )
+)

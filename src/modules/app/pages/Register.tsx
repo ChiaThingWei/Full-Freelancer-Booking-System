@@ -69,10 +69,10 @@ const Register = () => {
         setLoading(false);
     
         if (error) {
-          alert('提交失败，请稍后重试');
+          toast.error('提交失败，请稍后重试');
           console.error(error.message);
         } else {
-          alert('✅ 预约成功！我们会尽快与您联系');
+          toast.success(' 预约成功！我们会尽快与您联系');
           // 清空表单
           setName('');
           setPhone('');
@@ -89,11 +89,11 @@ const Register = () => {
     <div className='flex flex-col w-screen scroll-smooth justify-center  relative bg-gray-100'>
 
 
-    <div className='w-full flex justify-center items-center py-4'>
+    <div className='w-full  flex justify-center items-center py-4'>
         <img
         src='/images/kampung.webp'
         alt='build'
-        className='rounded relative object-cover w-4/5 h-[200px] md:h-[300px]'
+        className='rounded shadow-md relative object-cover w-4/5 h-[200px] md:h-[300px]'
         />
         <p className='absolute w-3/5 text-center '> 
             <span className='text-green-300 text-lg  md:text-3xl font-bold '>预约摄影时段 <br/></span>
@@ -123,7 +123,7 @@ const Register = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="请输入你的名字"
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300"
+            className="w-full p-2 border shadow-sm border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-300"
             required
         />
         </div>
