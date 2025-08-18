@@ -1,21 +1,25 @@
-import Particles, { initParticlesEngine } from "@tsparticles/react";
+import Particles  from "@tsparticles/react";
 import { useEffect, useState } from "react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
 
 
+
 const LoginBackground = () => {
 
     const [init, setInit] = useState(false);
+    
 
     useEffect(() => {
-        initParticlesEngine(async (engine: Engine) => {
-          // 这里加载 slim preset
+      const loadParticles = async () => {
+        const { initParticlesEngine } = await import("@tsparticles/react");
+        await initParticlesEngine(async (engine: Engine) => {
           await loadSlim(engine);
-        }).then(() => {
-          setInit(true);
         });
-      }, []);
+        setInit(true);
+      };
+      loadParticles();
+    }, []);
     
       if (!init) {
         return null;
