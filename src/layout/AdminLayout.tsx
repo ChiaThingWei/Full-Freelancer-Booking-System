@@ -7,6 +7,7 @@ import { useSidebarStore } from '@/lib/store/sidebarStore'
 import { MessageCircle } from 'lucide-react'
 import { TableOfContents } from 'lucide-react'
 import { Settings } from 'lucide-react'
+import { useUserProfile } from '@/lib/hooks/useProfileQuery'
 
 const menuItems = [
   {
@@ -35,7 +36,7 @@ const menuItems = [
   },
   {
     label: 'Setting',
-    href: '',
+    href: '/admin/setting',
     iconClass:'size-4',
     icon: Settings 
   }
@@ -46,6 +47,7 @@ const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const location = useLocation();
   const { collapsed, toggle } = useSidebarStore();
+  const { data, isLoading, error } = useUserProfile();
 
 
   return (
@@ -122,7 +124,7 @@ const AdminLayout = () => {
             setSidebarOpen(!sidebarOpen) }} className="text-xl md:hidden cursor-pointer my-auto">
               ☰
             </button>
-          <h2 className='font-semibold my-auto ml-4'>Chia Production</h2>
+          <h2 className='font-semibold my-auto ml-4'>{data?.profile?.business_name}</h2>
           </div>
 
           <div className='flex flex-row mr-6'>
@@ -131,7 +133,7 @@ const AdminLayout = () => {
             alt='profile'
             className='w-10 h-10 my-auto'
             />
-            <h2 className="my-auto ml-2 font-semibold">Chia Thing Wei</h2>
+            <h2 className="my-auto ml-2 font-semibold">{data?.profile?.name}</h2>
           </div>
         </header>
 

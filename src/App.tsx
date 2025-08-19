@@ -11,6 +11,7 @@ import { queryClient } from './lib/queryClient'
 import EditBooking from './modules/admin/pages/EditBooking'
 import Register from './modules/app/pages/Register'
 import AdminLogin from './modules/app/pages/Login'
+import Setting from './modules/admin/pages/Setting'
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
         <Route path='/admin' element={<AdminLayout/>}>
           <Route index element={<Dashboard/>}/>
           <Route path='managebooking' element={<ManageBooking/>}/>
+          <Route path='setting' element={<Setting/>}/>
           <Route path='managebooking/:bookingId/edit' element={<EditBooking/>}/>
         </Route>
 

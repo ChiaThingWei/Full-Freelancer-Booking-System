@@ -65,12 +65,13 @@ const LoginForm = () => {
             placeholder="m@example.com" 
             className="w-full p-3 border-2 border-gray-300 rounded mb-4 mt-2"
         />
-        <div className="flex justify-between">
+        {/* <div className="flex justify-between">
             <p>Password</p>
             <button
             className="cursor-pointer transition-colors duration-300 hover:text-blue-500"
             >Forgot your password?</button>
-        </div>
+        </div> */}
+         <label>Password</label>
         <input 
             type="password" 
             name="user-password"
@@ -81,6 +82,19 @@ const LoginForm = () => {
             className="w-full p-3 border-2 border-gray-300 rounded mt-2"
         />
 
+        <div className="flex justify-between">
+       
+            <button
+            className="mt-2 cursor-pointer transition-colors duration-300 hover:text-blue-500"
+            >Forgot your password?</button>
+             {error && (
+          <p className="text-red-500 text-sm mt-3">
+            Email or password is incorrect
+          </p>
+        )}
+
+        </div>
+        
     </div>
     <div>
         <button

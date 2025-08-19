@@ -3,7 +3,7 @@ import { useBookingFilterStore, useBookingPaginationStore, useBookingSearchStore
 import Menu from "../components/Menu"
 import { useBookingsByStatusPaginated } from "@/lib/hooks/useBookingQuery"
 import DataTable from "../components/DataTable"
-import { useState, useEffect, useRef } from "react"
+import {useEffect, useRef } from "react"
 import {debounce} from 'lodash'
 import { Search } from "lucide-react"
 import { useLocation } from "react-router-dom"
@@ -14,7 +14,7 @@ const ManageBooking = () => {
   const {page, setPage, limit,setLimit} = useBookingPaginationStore()
   const {statusFilter, setStatusFilter} = useBookingFilterStore()
   const {searchQuery, setSearchQuery,searchInput, setSearchInput} = useBookingSearchStore()
- 
+
   const {data:paginatedData = [], isLoading: isPageLoading, error: isPageError} = useBookingsByStatusPaginated(statusFilter,page,limit,searchQuery)
   const location = useLocation();
 

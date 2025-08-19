@@ -7,12 +7,26 @@ import UpcomingBookingCard from "../components/UpcomingBookingCard"
 import MonthlyRevenueLineChart from "../components/RevenueLineChart"
 import { useNavigate } from "react-router-dom"
 import Banner from "../components/Banner"
+import { useAuth } from "@/lib/hooks/useAuth"
+import { useEffect } from "react"
+import toast from "react-hot-toast"
+
 
 
 const Dashboard = () => {
 
   const { data, isLoading, error } = useMonthlyBookingStats()
   const navigate = useNavigate()
+  const session = useAuth()
+
+  useEffect(() => {
+    if (session === null) {
+      navigate("/admin/login");
+    }else{
+      toast.success("Welcome back")
+      navigate("/admin");
+    }
+  }, [session, navigate]);
 
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Error loading stats</div>
