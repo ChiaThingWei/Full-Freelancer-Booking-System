@@ -37,7 +37,6 @@ export const updateProfile = async (updates: {
     name?: string;
     business_name?: string;
   }): Promise<{ profile?: Profile; error?: string }> => {
-    // 先拿当前用户 ID
     const { data: { user }, error: userError } = await supabase.auth.getUser();
     if (userError || !user) return { error: userError?.message || "No user found" };
   
@@ -50,14 +49,26 @@ export const updateProfile = async (updates: {
   
     if (profileError) return { error: profileError.message };
     return { profile };
-  };
+  }
+
   
-  /**
-   * 更新登录密码
-   */
-  export const updatePassword = async (newPassword: string): Promise<{ success: boolean; error?: string }> => {
-    const { data, error } = await supabase.auth.updateUser({ password: newPassword });
+  
+  export const updatePassword = async (newPassword?: string): Promise<{ success: boolean; error?: string }> => {
+    const {  error } = await supabase.auth.updateUser({ password: newPassword });
     if (error) return { success: false, error: error.message };
-    console.log(data)
+   
+    
+
+    return { success: true };
+  };
+
+  export const verifyOldPassword = async (email: string, oldPassword: string) => {
+    const {  error } = await supabase.auth.signInWithPassword({
+      email,
+      password: oldPassword,
+    });
+  
+    
+    if (error) return { success: false, error: error.message };
     return { success: true };
   };

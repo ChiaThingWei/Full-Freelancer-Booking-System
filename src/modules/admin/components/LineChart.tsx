@@ -16,7 +16,6 @@ import {
     
       const {data: statsData, isLoading, error} = YearlyCompletedTotal()
     
-      console.log(statsData)
       if (isLoading) return <div>Loading...</div>;
       if (error) return <div>Failed to load</div>;
 

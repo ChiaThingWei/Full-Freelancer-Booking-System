@@ -25,6 +25,7 @@ const Menu = ({ setStatusFilter, active }: MenuProps) => {
   const {setPage} = useBookingPaginationStore()
   const { data: counts } = useBookingsCounts() 
 
+
   console.log(counts)
 
   const options = [

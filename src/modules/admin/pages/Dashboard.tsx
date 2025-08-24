@@ -1,15 +1,14 @@
 import { useMonthlyBookingStats } from "@/lib/hooks/useBookingQuery"
-import Card from "../components/Card"
-import Card2 from "../components/Card2"
+import Card from "../components/SummaryCard"
+import Card2 from "../components/SummaryCard2"
 import DistributionChart from "../components/DistributionChart"
 import MonthlyCompletedLineChart from "../components/LineChart"
-import UpcomingBookingCard from "../components/UpcomingBookingCard"
+import EventCalender from "../components/EventCalender"
 import MonthlyRevenueLineChart from "../components/RevenueLineChart"
 import { useNavigate } from "react-router-dom"
-import Banner from "../components/Banner"
+import Banner from "../components/DashboardBanner"
 import { useAuth } from "@/lib/hooks/useAuth"
 import { useEffect } from "react"
-import toast from "react-hot-toast"
 
 
 
@@ -20,12 +19,11 @@ const Dashboard = () => {
   const session = useAuth()
 
   useEffect(() => {
+    if (session === undefined) return; // ⏳ 还在加载，不做事
+
     if (session === null) {
       navigate("/admin/login");
-    }else{
-      toast.success("Welcome back")
-      navigate("/admin");
-    }
+    } 
   }, [session, navigate]);
 
   if (isLoading) return <div>Loading...</div>
@@ -79,7 +77,7 @@ const Dashboard = () => {
 
         <div className=" my-8 border-gray-300">
             <p className="pl-4 font-semibold  text-xl mt-4">Calender</p>
-            <UpcomingBookingCard/>
+            <EventCalender/>
         </div>
 
         <p className="pl-4 font-semibold  text-xl mt-4 mb-6">Statistic</p>

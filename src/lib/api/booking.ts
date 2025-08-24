@@ -217,9 +217,6 @@ export async function getLast12MonthsServiceTotals() {
     value
   }));
 
-  console.log(startDate)
-  console.log(completedBookings)
-
   return {
     totalCompleted: completedBookings.length,
     serviceTotals: serviceTotalsArr,
@@ -281,8 +278,6 @@ export async function getLast12MonthsCompletedTotals() {
         monthNames.indexOf(aMonth) - monthNames.indexOf(bMonth)
       );
     });
-
-    console.log(result.reverse())
 
   return result
 }
