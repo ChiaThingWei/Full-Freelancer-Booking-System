@@ -24,10 +24,10 @@ export const useBookingQuery = () => {
 }
 
 // Fetch bookings by status
-export const useBookingByStatus  = (status:string) => {
+export const useBookingByStatus  = (status:string, client_id:number) => {
   return useQuery({
     queryKey: ['bookings', status], 
-    queryFn: () => fetchBookingsByStatus(status),
+    queryFn: () => fetchBookingsByStatus(status,client_id),
     staleTime: 1000 * 60 * 5,
   })
 }
@@ -83,27 +83,27 @@ export const useBookingsCounts = (client_id:number) => {
 // }
 
 //use to show this month booking
-export const useMonthlyBookingStats = () => {
+export const useMonthlyBookingStats = (client_id:number) => {
   return useQuery({
     queryKey: ['monthlyBookingStats'],
-    queryFn: getMonthlyBookingStats,
+    queryFn: ()=>getMonthlyBookingStats(client_id),
     staleTime: 1000 * 60 * 5
   });
 };
 
 // use to show the total for each service in last 12 months
-export function YearlyServiceTotal() {
+export function YearlyServiceTotal(client_id:number) {
  return useQuery({
     queryKey: ['yearlyServiceStats'],
-    queryFn: getLast12MonthsServiceTotals,
+    queryFn: ()=>getLast12MonthsServiceTotals(client_id),
   })
 }
 
 // use to show total booking for last 12 months
-export function YearlyCompletedTotal() {
+export function YearlyCompletedTotal(client_id:number) {
   return useQuery({
      queryKey: ['yearlyCompletedStats'],
-     queryFn: getLast12MonthsCompletedTotals,
+     queryFn: ()=>getLast12MonthsCompletedTotals(client_id),
    })
  }
 

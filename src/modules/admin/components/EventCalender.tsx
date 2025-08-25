@@ -1,5 +1,6 @@
 
 import { useBookingByStatus } from '@/lib/hooks/useBookingQuery'
+import { useBookingStore } from '@/lib/store/bookingFilterStore';
 import {  format } from 'date-fns'
 import { useState } from "react";
 import { DayPicker } from "react-day-picker";
@@ -16,8 +17,8 @@ type Appointment = {
 
 const EventCalender = () => {
 
-
-    const { data: bookings, isLoading, error } = useBookingByStatus('confirmed');
+    const {currentClientId} = useBookingStore()
+    const { data: bookings, isLoading, error } = useBookingByStatus('confirmed',currentClientId??0);
 
 
     const confirmedDays = bookings?.map(b => new Date(b.date))

@@ -1,4 +1,5 @@
 import { YearlyServiceTotal } from '@/lib/hooks/useBookingQuery'
+import { useBookingStore } from '@/lib/store/bookingFilterStore';
 import dayjs from 'dayjs'
 
 import {
@@ -18,7 +19,8 @@ const COLORS = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#00C49F', '#FFBB28'
 
 const DistributionChart = () => {
 
-  const {data: statsData, isLoading, error} = YearlyServiceTotal()
+  const {currentClientId} = useBookingStore()
+  const {data: statsData, isLoading, error} = YearlyServiceTotal(currentClientId??0)
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Failed to load</div>;

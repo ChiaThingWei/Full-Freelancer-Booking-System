@@ -9,12 +9,14 @@ import { useNavigate } from "react-router-dom"
 import Banner from "../components/DashboardBanner"
 import { useAuth } from "@/lib/hooks/useAuth"
 import { useEffect } from "react"
+import { useBookingStore } from "@/lib/store/bookingFilterStore"
 
 
 
 const Dashboard = () => {
 
-  const { data, isLoading, error } = useMonthlyBookingStats()
+  const {currentClientId} = useBookingStore()
+  const { data, isLoading, error } = useMonthlyBookingStats(currentClientId?? 0)
   const navigate = useNavigate()
   const session = useAuth()
 

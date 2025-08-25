@@ -53,11 +53,12 @@ export const fetchLatestBookingsByStatus = async (status: string, limit: number)
 }
 
 // use to show booking with status
-export const fetchBookingsByStatus = async (status: string) => {
+export const fetchBookingsByStatus = async (status: string, client_id:number) => {
   const { data, error } = await supabase
     .from('bookings')
     .select('*')
     .eq('status', status)
+    .eq('client_id', client_id)
     .order('created_at', { ascending: false })
 
   if (error) throw new Error(error.message)
@@ -164,7 +165,7 @@ export const fetchBookingsCounts = async (clientId: number): Promise<Record<'all
 //statistic used////// ////////////////////////////////////////////////////////
 
 //dashboard use to show this month statistic help client manage booking more easily
-export async function getMonthlyBookingStats() {
+export async function getMonthlyBookingStats(currentClientId:number) {
 
   const now = new Date();
   const startOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString()
@@ -181,6 +182,7 @@ export async function getMonthlyBookingStats() {
   const { data, error } = await supabase
     .from('bookings')
     .select('status, confirmedFee')
+    .eq('client_id',currentClientId)
     .gte('created_at', startOfMonth)
     .lte('created_at', endOfMonth)
 
@@ -215,7 +217,7 @@ export async function getMonthlyBookingStats() {
 }
 
 // use to show latest 12 months total booking for each service
-export async function getLast12MonthsServiceTotals() {
+export async function getLast12MonthsServiceTotals(client_id:number) {
   const now = new Date();
 
   const startDate = new Date(now.getFullYear(), now.getMonth() - 11, 1).toISOString();
@@ -224,6 +226,7 @@ export async function getLast12MonthsServiceTotals() {
   const { data, error } = await supabase
     .from('bookings')
     .select('status, service, created_at') 
+    .eq('client_id', client_id)
     .gte('created_at', startDate)
     .lte('created_at', endDate);
 
@@ -249,13 +252,14 @@ export async function getLast12MonthsServiceTotals() {
 }
 
 // use to show total booking for each month in latest 12 months
-export async function getLast12MonthsCompletedTotals() {
+export async function getLast12MonthsCompletedTotals(client_id:number) {
   const now = new Date();
   const startDate = new Date(now.getFullYear(), now.getMonth() - 11, 1).toISOString();
 
   const { data, error } = await supabase
     .from('bookings')
     .select('created_at, status, confirmedFee')
+    .eq('client_id',client_id)
     .gte('created_at', startDate)
     .lte('created_at', now.toISOString());
 

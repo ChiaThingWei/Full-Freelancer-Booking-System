@@ -1,5 +1,6 @@
 // components/MonthlyCompletedLineChart.tsx
 import { YearlyCompletedTotal } from '@/lib/hooks/useBookingQuery';
+import { useBookingStore } from '@/lib/store/bookingFilterStore';
 import {
     LineChart,
     Line,
@@ -13,8 +14,8 @@ import {
  
   export default function MonthlyRevenueLineChart() {
 
-    
-      const {data: statsData, isLoading, error} = YearlyCompletedTotal()
+      const {currentClientId} = useBookingStore()
+      const {data: statsData, isLoading, error} = YearlyCompletedTotal(currentClientId ??0)
     
     
       if (isLoading) return <div>Loading...</div>;
@@ -35,6 +36,7 @@ import {
             <Line
               type="monotone"
               dataKey="totalConfirmedFee"
+              name="Total Revenue" 
               stroke="#8884d8"
               strokeWidth={2}
               dot={{ r: 4 }}
