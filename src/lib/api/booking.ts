@@ -81,6 +81,7 @@ export const fetchBookingsByStatusPaginated = async (
   status: string,
   page: number,
   pageSize: number,
+  currentClientId: number,
   searchQuery?: string
 ) => {
   const from = (page - 1) * pageSize;
@@ -89,6 +90,7 @@ export const fetchBookingsByStatusPaginated = async (
   let query = supabase
     .from('bookings')
     .select('*')
+    .eq('client_id',currentClientId)
     .order('created_at', { ascending: false })
     .range(from, to);
 
@@ -113,27 +115,49 @@ export const fetchBookingsByStatusPaginated = async (
 }
 
 // use to show booking counts by status
-export const fetchBookingsCounts = async (): Promise<Record<'all'|'pending'|'confirmed'|'cancelled'|'shooting_done'|'completed', number>> => {
-  // 聚合查询：按 status 计数
+// export const fetchBookingsCounts = async (): Promise<Record<'all'|'pending'|'confirmed'|'cancelled'|'shooting_done'|'completed', number>> => {
+ 
+//   const { data, error } = await supabase
+//     .from('bookings')
+//     .select('status', { count: 'exact' });
+
+//   if (error) throw new Error(error.message);
+
+//   // 汇总各状态数量
+//   const counts = { pending: 0, confirmed: 0,  completed: 0,all: 0 , cancelled: 0, shooting_done: 0 };
+//   data?.forEach((item) => {
+//     counts.all += 1
+//     if (item.status === 'pending') counts.pending += 1
+//     if (item.status === 'confirmed') counts.confirmed += 1
+//     if (item.status === 'shooting_done') counts.shooting_done += 1
+//     if (item.status === 'completed') counts.completed += 1
+//     if (item.status === 'cancelled') counts.cancelled += 1
+//   });
+//   console.log(counts)
+//   return counts;
+// };
+export const fetchBookingsCounts = async (clientId: number): Promise<Record<'all'|'pending'|'confirmed'|'cancelled'|'shooting_done'|'completed', number>> => {
   const { data, error } = await supabase
     .from('bookings')
-    .select('status', { count: 'exact' });
+    .select('status', { count: 'exact' })
+    .eq('client_id', clientId); // 只拿当前 client 的
 
   if (error) throw new Error(error.message);
 
   // 汇总各状态数量
-  const counts = { pending: 0, confirmed: 0,  completed: 0,all: 0 , cancelled: 0, shooting_done: 0 };
+  const counts = { pending: 0, confirmed: 0, completed: 0, all: 0, cancelled: 0, shooting_done: 0 };
   data?.forEach((item) => {
-    counts.all += 1
-    if (item.status === 'pending') counts.pending += 1
-    if (item.status === 'confirmed') counts.confirmed += 1
-    if (item.status === 'shooting_done') counts.shooting_done += 1
-    if (item.status === 'completed') counts.completed += 1
-    if (item.status === 'cancelled') counts.cancelled += 1
+    counts.all += 1;
+    if (item.status === 'pending') counts.pending += 1;
+    if (item.status === 'confirmed') counts.confirmed += 1;
+    if (item.status === 'shooting_done') counts.shooting_done += 1;
+    if (item.status === 'completed') counts.completed += 1;
+    if (item.status === 'cancelled') counts.cancelled += 1;
   });
-  console.log(counts)
+
   return counts;
 };
+
 
 
 
@@ -279,7 +303,7 @@ export async function getLast12MonthsCompletedTotals() {
       );
     });
 
-  return result
+  return result.reverse()
 }
 
 //////////edit, update data////////////////

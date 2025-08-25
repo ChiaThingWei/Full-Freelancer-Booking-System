@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/drawer"
 
 import { SlidersHorizontal } from "lucide-react"
-import { useBookingPaginationStore } from '@/lib/store/bookingFilterStore'
+import {  useBookingStore } from '@/lib/store/bookingFilterStore'
 import { useBookingsCounts } from '@/lib/hooks/useBookingQuery'
 
 interface MenuProps {
@@ -22,8 +22,8 @@ interface MenuProps {
 
 const Menu = ({ setStatusFilter, active }: MenuProps) => {
 
-  const {setPage} = useBookingPaginationStore()
-  const { data: counts } = useBookingsCounts() 
+  const {setPage,currentClientId} = useBookingStore()
+  const { data: counts } = useBookingsCounts(currentClientId ?? 0) 
 
 
   console.log(counts)

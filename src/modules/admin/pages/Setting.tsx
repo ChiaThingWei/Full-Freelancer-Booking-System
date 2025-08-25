@@ -65,19 +65,19 @@ const Setting = () => {
       const handleUpdatePassword = async() =>{
         console.log('hi')
         if (!passwordData.oldPassword || !passwordData.newPassword || !passwordData.confirmedNewPassword) {
-          toast.error("请填写完整信息");
+          toast.error("Please fill in all field");
           return;
         }
 
         if (passwordData.newPassword !== passwordData.confirmedNewPassword) {
-          toast.error("两次输入的新密码不一致");
+          toast.error("new password didn't matched");
           return;
         }
        
 
         const verify = await verifyOldPassword.mutateAsync({email:formData.email, oldPassword:passwordData.oldPassword});
         if (!verify.success) {
-          toast.error("旧密码错误：" + verify.error);
+          toast.error("Old password error:" + verify.error);
         
           return;
         }
@@ -86,9 +86,10 @@ const Setting = () => {
         passwordData.newPassword
         )
         if (result.success) {
-          toast.success("密码修改成功 ✅");
+          toast.success("Update password successful");
+          setIsPasswordWindowOpen(false)
         } else {
-          toast.error("修改失败：" + result.error);
+          toast.error("Error：" + result.error);
         }
 
       }
@@ -156,7 +157,8 @@ const Setting = () => {
 
             <button
             type="button"
-            className="py-3 bg-white mb-6 border-2 rounded-xl  cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300"
+            disabled
+            className="py-3 disabled:bg-gray-200 bg-white mb-6 border-2 rounded-xl  cursor-not-allowed  transition-colors duration-300"
             >Update Email</button>
 
             <button

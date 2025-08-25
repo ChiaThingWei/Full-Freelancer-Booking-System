@@ -22,7 +22,7 @@ export const getCurrentUserProfile = async (): Promise<UserProfileResult> => {
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
     .select("*")
-    .eq("id", user.id)
+    .eq("auth_id", user.id)
     .single();
 
   if (profileError) return { user, profile: null, error: profileError.message };
@@ -43,7 +43,7 @@ export const updateProfile = async (updates: {
     const { data: profile, error: profileError } = await supabase
       .from("profiles")
       .update(updates)
-      .eq("id", user.id)
+      .eq("auth_id", user.id)
       .select("*")
       .single();
   
@@ -72,3 +72,21 @@ export const updateProfile = async (updates: {
     if (error) return { success: false, error: error.message };
     return { success: true };
   };
+
+  export const getCurrentClientId = async () => {
+    // 必须 await
+    const { data, error } = await supabase.auth.getUser(); 
+  
+    if (error || !data.user) return null
+    const userId = data.user.id
+  
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('client_id')
+      .eq('auth_id', userId)
+      .single();
+  
+    if (profileError) throw new Error(profileError.message);
+    return profile?.client_id ?? null;
+  };
+  

@@ -1,4 +1,4 @@
-import { useBookingFilterStore, useBookingPaginationStore, useBookingSearchStore } from "@/lib/store/bookingFilterStore"
+import { useBookingStore } from "@/lib/store/bookingFilterStore"
 // import BookingCard from "../components/BookingCard"
 import Menu from "../components/Menu"
 import { useBookingsByStatusPaginated } from "@/lib/hooks/useBookingQuery"
@@ -11,12 +11,11 @@ import { useLocation } from "react-router-dom"
 
 const ManageBooking = () => {
 
-  const {page, setPage, limit,setLimit} = useBookingPaginationStore()
-  const {statusFilter, setStatusFilter} = useBookingFilterStore()
-  const {searchQuery, setSearchQuery,searchInput, setSearchInput} = useBookingSearchStore()
-
-  const {data:paginatedData = [], isLoading: isPageLoading, error: isPageError} = useBookingsByStatusPaginated(statusFilter,page,limit,searchQuery)
+  const {page, setPage, limit,setLimit,statusFilter, setStatusFilter, currentClientId,searchQuery, setSearchQuery,searchInput, setSearchInput} = useBookingStore()
+  const {data:paginatedData = [], isLoading: isPageLoading, error: isPageError} = useBookingsByStatusPaginated(statusFilter,page,limit,currentClientId ?? 0,searchQuery)
   const location = useLocation();
+
+  console.log(currentClientId)
 
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);

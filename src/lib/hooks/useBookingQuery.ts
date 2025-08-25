@@ -61,11 +61,11 @@ export const useConfirmedBookingByLimit = (status:string , limit:number)=>{
 }
 
 
-export const useBookingsCounts = () => {
+export const useBookingsCounts = (client_id:number) => {
 
   return useQuery({
     queryKey:['bookingsCounts'],
-    queryFn: ()=> fetchBookingsCounts(),
+    queryFn: ()=> fetchBookingsCounts(client_id),
     staleTime: 1000 * 60 * 5,
   })
 
@@ -114,11 +114,12 @@ export const useBookingsByStatusPaginated = (
   status: string,
   page: number,
   pageSize: number,
-  searchQuery?: string
+  currentClientId:number,
+  searchQuery?: string,
 ) => {
   return useQuery({
-    queryKey: ['bookings', status, page, pageSize, searchQuery],
-    queryFn: () => fetchBookingsByStatusPaginated(status, page, pageSize, searchQuery),
+    queryKey: ['bookings', status, page, pageSize, searchQuery,currentClientId],
+    queryFn: () => fetchBookingsByStatusPaginated(status, page, pageSize, currentClientId,searchQuery),
     staleTime: 1000 * 60,
     placeholderData: keepPreviousData,
   })

@@ -2,6 +2,7 @@ import { supabase } from "../supabaseClient";
 
 export type Profile = {
   id: string;
+  auth_id: string
   role: "client" | "admin" | "provider";
   provider_type: string | null;
   name: string;
@@ -11,8 +12,8 @@ export type Profile = {
 export const getProfile = async (userId: string): Promise<Profile> => {
   const { data, error } = await supabase
     .from("profiles")
-    .select("id, role, provider_type, name, email")
-    .eq("id", userId)
+    .select("id, auth_id,role, provider_type, name, email")
+    .eq("auth_id", userId)
     .single();
 
     console.log('hi' )

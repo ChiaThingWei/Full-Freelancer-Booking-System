@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import DatePicker from 'react-datepicker'
 import { useNavigate } from 'react-router-dom'
+import { useBookingStore } from '@/lib/store/bookingFilterStore'
 
 const EditBooking = () => {
 
@@ -11,11 +12,12 @@ const EditBooking = () => {
   const idNum = Number(bookingId)
   const {data:booking, isLoading, error} = useBookingById(idNum)
   const updateBookingMutation = useUpdateBooking()
+  const { statusFilter } = useBookingStore()
 
   const navigate = useNavigate()
 
   const handleBack = ()=> {
-    navigate('/admin/managebooking')
+    navigate(`/admin/managebooking?tab=${statusFilter}`)
 }
 
   const handleSubmit = () => {

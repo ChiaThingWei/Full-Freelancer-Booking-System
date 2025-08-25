@@ -35,6 +35,12 @@ const menuItems = [
     icon: TableOfContents
   },
   {
+    label: 'Manage Services',
+    href: '',
+    iconClass:'size-4',
+    icon: TableOfContents
+  },
+  {
     label: 'Setting',
     href: '/admin/setting',
     iconClass:'size-4',
@@ -47,7 +53,7 @@ const AdminLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const location = useLocation();
   const { collapsed, toggle } = useSidebarStore();
-  const { data, isLoading, error } = useUserProfile();
+  const { data } = useUserProfile();
 
 
   return (
