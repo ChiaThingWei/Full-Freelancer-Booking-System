@@ -1,4 +1,3 @@
-// import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import '@/index.css'
@@ -16,11 +15,6 @@ export default function BookingDatePicker({ selectedDate, setSelectedDate }: Pro
       
       <DatePicker
         selected={selectedDate}
-        // onChange={(date: Date | null) => {
-        //     if (date) {
-        //       setSelectedDate(date);
-        //     }
-        //   }}
         onChange={(date: Date | null) => {
           if (date) {
             const fixedDate = new Date(date);

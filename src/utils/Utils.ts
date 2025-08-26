@@ -43,65 +43,70 @@ export const customers = [
     },
   ]
 
-  export const services = [
-    {
-      price: 'From RM99',
-      img: '/images/js-graduate.webp',
-      title: '毕业照',
-      service: 'graduation',
-      desc: '以自信与仪式感，定格穿上学袍的高光时刻——无论在校园或户外。',
-      details: [
-        '个人毕业肖像或小型合影',
-        '校园或户外取景',
-        '提供服装搭配建议',
-        '15-20 张精修照片',
-        '线上图库浏览',
-        '提供打印服务'
-      ]
-    },
-    {
-      price: 'From RM199',
-      img: '/images/pro1.webp',
-      title: '专业形象照',
-      service: 'professional',
-      desc: '干净、利落的肖像照，适合用在 LinkedIn、履历或商务场合。',
-      details: [
-        '个人肖像拍摄',
-        '室内棚拍或自然光场景可选',
-        '包含服装与造型建议',
-        '15-20 张精修照片',
-        '线上图库浏览与下载',
-        '提供打印选购服务'
-      ]
-    },
-    {
-      price: 'From RM129',
-      img: '/images/outdoor.webp',
-      title: '户外人像',
-      service: 'outdoor',
-      desc: '自然光与风景为背景，捕捉独处、情侣或生活感的自然瞬间。',
-      details: [
-        '适合个人、情侣或朋友拍摄',
-        '户外自然光拍摄',
-        '自由风格与姿势引导',
-        '提供服装风格建议',
-        '15-20 张精修照片',
-        '线上图库与打印选项'
-      ]
-    },
-    {
-      price: 'From RM159',
-      img: '/images/fam.webp',
-      title: '家庭合影',
-      service: 'family',
-      desc: '在轻松自在的氛围中，拍下属于你们一家人之间的温暖与牵绊。',
-      details: [
-        '适合家庭成员合影（最多6人）',
-        '可选室内布景或户外自然场地',
-        '提供拍摄引导与服装协调建议',
-        '15-20 张精修照片',
-        '线上图库分享',
-        '支持打印订购'
-      ]
-    }
-  ];
+export const demoGallery = [
+  {images:'/images/js-graduate.webp'},
+  {images:'/images/szeying2.webp'},
+  {images:'/images/pro1.webp'},
+  {images:'/images/fam.webp'},
+  {images:'/images/outdoor.webp'}
+]
+
+
+export const services = [
+  {
+    price: 'From RM99',
+    img: '/images/js-graduate.webp',
+    title: 'Graduation Portraits',
+    service: 'graduation',
+    desc: 'Capture the proud moment of wearing your gown — whether on campus or outdoors.',
+    details: [
+      'Individual or small group portraits',
+      'Campus or outdoor locations',
+      'Wardrobe styling guidance',
+      '15–20 retouched photos',
+      'Online gallery access'
+    ]
+  },
+  {
+    price: 'From RM199',
+    img: '/images/pro1.webp',
+    title: 'Professional Headshots',
+    service: 'professional',
+    desc: 'Clean and polished portraits, perfect for LinkedIn, resumes, or business profiles.',
+    details: [
+      'Studio or natural light setting',
+      'Wardrobe and styling suggestions',
+      '15–20 professionally edited photos',
+      'Online gallery with downloads',
+      'Optional print service'
+    ]
+  },
+  {
+    price: 'From RM129',
+    img: '/images/outdoor.webp',
+    title: 'Outdoor Portraits',
+    service: 'outdoor',
+    desc: 'Natural light and scenic backdrops to capture candid, lifestyle moments.',
+    details: [
+      'Ideal for individuals, couples, or friends',
+      'Outdoor natural light photography',
+      'Creative posing and direction',
+      '15–20 retouched images',
+      'Gallery with print options'
+    ]
+  },
+  {
+    price: 'From RM159',
+    img: '/images/fam.webp',
+    title: 'Family Portraits',
+    service: 'family',
+    desc: 'Relaxed and heartwarming portraits that reflect your family bond.',
+    details: [
+      'Up to 6 family members',
+      'Indoor or outdoor locations',
+      'Wardrobe and posing guidance',
+      '15–20 edited portraits',
+      'Shareable online gallery'
+    ]
+  }
+];
