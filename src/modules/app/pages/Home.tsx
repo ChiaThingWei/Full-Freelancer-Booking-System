@@ -1,5 +1,7 @@
+
 import AboutMe from "../components/AboutMe"
 import Contacts from "../components/Contacts"
+import Footer from "../components/Footer"
 import Introduction from "../components/Introduction"
 import MyWork from "../components/MyWork"
 import Navbar from "../components/Navbar"
@@ -14,6 +16,7 @@ const Home = () => {
     <MyWork/>
     <Services/>
     <Contacts/>
+    <Footer/>
   </div>
   )
 }

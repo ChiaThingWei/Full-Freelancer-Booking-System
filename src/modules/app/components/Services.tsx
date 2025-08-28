@@ -8,10 +8,10 @@ const Services = () => {
   const [selectedService, setSelectedService] = useState<null | typeof services[0]>(null)
 
   return (
-    <section id='services' className=' scroll-mt-10'>
+    <section id='services' className=''>
      
 
-  <div className=' w-screen lg:h-screen bg-gray-50 flex items-center overflow-hidden'>
+  <div className=' w-screen md:h-screen bg-gray-50 flex items-center overflow-hidden'>
 
   <div className='flex flex-col mt-10 lg:mt-0 mx-auto md:w-5/6 justify-center items-center'>
             <h1 className=' text-2xl lg:text-4xl mx-auto font-semibold'>My Services</h1>
@@ -56,12 +56,23 @@ const Services = () => {
                     ))}
                     </ul>
 
-                <button
-                  onClick={() => setSelectedService(null)}
-                  className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                >
-                  Close
-                </button>
+                    <div className="w-full flex flex-row justify-evenly mt-4">
+                    <button
+                      onClick={() => setSelectedService(null)}
+                      className="mt-4 px-4 py-2 bg-red-500 transition-colors duration-300 cursor-pointer text-white rounded hover:bg-red-600 flex items-center justify-center"
+                    >
+                      Close
+                    </button>
+
+                    <a 
+                      href="#contact"
+                      className="mt-4 px-4 py-2 flex items-center justify-center rounded bg-blue-500 hover:bg-blue-600 transition-colors duration-300 cursor-pointer text-white"
+                    >
+                      Booking
+                    </a>
+                  </div>
+
+                
               </div>
             </div>
           </div>)}

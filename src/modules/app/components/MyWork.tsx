@@ -6,6 +6,8 @@ import {
     CarouselPrevious,
   } from "@/components/ui/carousel"
 
+  import Autoplay from "embla-carousel-autoplay"
+
     import portfolio1 from '/images/js-graduate.webp'
     import portfolio2 from '/images/szeying2.webp'
     import portfolio3 from '/images/pro1.webp'
@@ -54,6 +56,11 @@ const MyWork = () => {
         </p>
       <div className="relative w-2/3 md:w-full ">
             <Carousel
+             plugins={[
+              Autoplay({
+                delay: 3000, // 每 3 秒滚动一次
+              }),
+            ]}
               opts={{
                 align: "start",
                 loop: true,

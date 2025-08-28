@@ -1,7 +1,7 @@
 
 const AboutMe = () => {
   return (
-    <section id='portfolio' className=' '>
+    <section id='about' className=' '>
       <div className=' w-screen h-screen flex items-center overflow-hidden'>
         
          <div className='flex flex-col mx-auto md:w-3/5 justify-center items-center'>

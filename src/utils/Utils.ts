@@ -54,7 +54,7 @@ export const demoGallery = [
 
 export const services = [
   {
-    price: 'From RM99',
+    price: 'Starting at RM99',
     img: '/images/js-graduate.webp',
     title: 'Graduation Portraits',
     service: 'graduation',
@@ -68,7 +68,7 @@ export const services = [
     ]
   },
   {
-    price: 'From RM199',
+    price: 'Starting at RM199',
     img: '/images/pro1.webp',
     title: 'Professional Headshots',
     service: 'professional',
@@ -82,7 +82,7 @@ export const services = [
     ]
   },
   {
-    price: 'From RM129',
+    price: 'Starting at RM129',
     img: '/images/outdoor.webp',
     title: 'Outdoor Portraits',
     service: 'outdoor',
@@ -96,7 +96,7 @@ export const services = [
     ]
   },
   {
-    price: 'From RM159',
+    price: 'Starting at RM159',
     img: '/images/fam.webp',
     title: 'Family Portraits',
     service: 'family',

@@ -11,7 +11,7 @@ const Introduction = () => {
   }, []); 
 
   return (
-    <section id='about' className='scroll-mt-5'>
+    <section id='' className='scroll-mt-5'>
        <div className='relative w-screen h-screen overflow-hidden'>
 
           <img
@@ -51,15 +51,19 @@ const Introduction = () => {
 
                         <div className='w-full h-[50px] mt-10 flex flex-row justify-evenly md:justify-start md:gap-14 '>
 
-                          <button 
-                          type='button'
-                          className='hover:bg-blue-600 transition-colors duration-300 px-6 text-center rounded-lg bg-blue-500 pointer-events-auto opacity-90 cursor-pointer  text-white'>
-                            Get In Touch</button>
+                            <a 
+                              href="#contact"
+                              className="hover:bg-blue-600 flex items-center justify-center transition-colors duration-300 p-6 rounded-lg bg-blue-500 pointer-events-auto opacity-90 cursor-pointer text-white"
+                            >
+                              View Services
+                            </a>
 
-                            <button 
-                          type='button'
-                          className='hover:bg-gray-300 transition-colors duration-300 px-6 text-center rounded-lg bg-white pointer-events-auto opacity-90 cursor-pointer  text-blue-500'>
-                            View Services</button>
+                            <a 
+                              href="#services"
+                              className="hover:bg-gray-300 flex items-center justify-center transition-colors duration-300 p-6 rounded-lg bg-white pointer-events-auto opacity-90 cursor-pointer text-blue-500"
+                            >
+                              View Services
+                            </a>
                       </div>
 
               </div>
