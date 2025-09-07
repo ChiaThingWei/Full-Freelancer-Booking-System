@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import BookingDatePicker from "../components/ReactDatepicker";
 import { supabase } from '../../../lib/supabaseClient';
 import toast from 'react-hot-toast';
+import { useTranslation } from "react-i18next";
 
 import {
   Select,
@@ -14,11 +15,11 @@ import {
 
 const Contacts = () => {
 
-  // const [selectedDate] = useState<Date | null>(null);
+  const { t } = useTranslation()
    const [bookedSlots, setBookedSlots] = useState<string[]>([])
    const [loading, setLoading] = useState(false);
      const slots = ['9:00', '12:00', '15:00','18:00','21:00'];
-    //  const [selectedSlot, setSelectedSlot] = useState('');
+    
 
      const [formData, setFormData] = useState({
       name: "",
@@ -111,11 +112,10 @@ const Contacts = () => {
               <div className=' w-screen h-auto bg-gray-100 flex items-center overflow-hidden'>
 
                 <div className='flex flex-col mx-auto w-4/5  justify-center items-center'>
-                  <h1 className=' text-2xl lg:text-4xl mt-10  mx-auto font-semibold'>Ready to Get Started ?</h1>
-                  <p className="text-gray-500 mt-2">Let’s connect and plan your next step.</p>
+                  <h1 className=' text-2xl lg:text-4xl mt-10  mx-auto font-semibold'>{t("booking_title")}</h1>
+                  <p className="text-gray-500 mt-2">{t("booking_description")}</p>
 
                  
-
                     <form 
                     onSubmit={handleSubmit}
                     className="flex flex-col md:flex-row mt-10 gap-6 rounded-lg bg-white shadow-sm p-6 w-full">

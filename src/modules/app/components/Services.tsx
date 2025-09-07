@@ -1,10 +1,10 @@
 import { services } from "../../../utils/Utils"
 import { useState } from "react";
-
-
+import { useTranslation } from "react-i18next";
 
 const Services = () => {
 
+  const { t } = useTranslation()
   const [selectedService, setSelectedService] = useState<null | typeof services[0]>(null)
 
   return (
@@ -14,9 +14,9 @@ const Services = () => {
   <div className=' w-screen md:h-screen bg-gray-50 flex items-center overflow-hidden'>
 
   <div className='flex flex-col mt-10 lg:mt-0 mx-auto md:w-5/6 justify-center items-center'>
-            <h1 className=' text-2xl lg:text-4xl mx-auto font-semibold'>My Services</h1>
+            <h1 className=' text-2xl lg:text-4xl mx-auto font-semibold'>{t("myServices_title")}</h1>
 
-            <p className='my-10 px-10 text-gray-500 text-center'>I offer a comprehensive range of services to help you achieve your digital goals.</p>
+            <p className='my-10 px-10 text-gray-500 text-center'>{t("myServices_description")}</p>
 
 
         <div className="grid mb-10 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-10 md:px-4">
@@ -59,14 +59,14 @@ const Services = () => {
                     <div className="w-full flex flex-row justify-evenly mt-4">
                     <button
                       onClick={() => setSelectedService(null)}
-                      className="mt-4 px-4 py-2 bg-red-500 transition-colors duration-300 cursor-pointer text-white rounded hover:bg-red-600 flex items-center justify-center"
+                      className="mt-4 px-4 py-2 bg-gray-300 transition-colors duration-300 cursor-pointer text-white rounded hover:text-black items-center justify-center"
                     >
                       Close
                     </button>
 
                     <a 
                       href="#contact"
-                      className="mt-4 px-4 py-2 flex items-center justify-center rounded bg-blue-500 hover:bg-blue-600 transition-colors duration-300 cursor-pointer text-white"
+                      className="mt-4 px-4 py-2 flex items-center justify-center rounded bg-blue-500 hover:text-black transition-colors duration-300 cursor-pointer text-white"
                     >
                       Booking
                     </a>

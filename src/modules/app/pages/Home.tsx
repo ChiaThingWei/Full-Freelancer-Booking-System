@@ -6,9 +6,11 @@ import Introduction from "../components/Introduction"
 import MyWork from "../components/MyWork"
 import Navbar from "../components/Navbar"
 import Services from "../components/Services"
+import { AppProvider } from "../components/AppProvider"
 
 const Home = () => {
   return (
+    <AppProvider>
     <div className='flex flex-col w-screen scroll-smooth justify-center  relative bg-gray-100'>
     <Navbar/>
     <Introduction/>
@@ -18,6 +20,7 @@ const Home = () => {
     <Contacts/>
     <Footer/>
   </div>
+  </AppProvider>
   )
 }
 

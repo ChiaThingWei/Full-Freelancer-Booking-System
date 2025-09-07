@@ -13,6 +13,7 @@ import {
     import portfolio3 from '/images/pro1.webp'
     import portfolio4 from '/images/fam.webp'
     import portfolio5 from '/images/outdoor.webp'
+    import { useTranslation } from "react-i18next"
 
   const portfolioItems = [
     {
@@ -43,16 +44,18 @@ import {
   ];
 
 const MyWork = () => {
+
+ const { t } = useTranslation()
+
   return (
     <section id='portfolio' className=' '>
       <div className=' w-screen h-screen bg-gray-100 flex items-center overflow-hidden'>
 
       <div className='flex flex-col mx-auto md:w-4/5 justify-center items-center'>
-      <h1 className=' text-2xl lg:text-4xl mx-auto font-semibold'>My Work</h1>
+      <h1 className=' text-2xl lg:text-4xl mx-auto font-semibold'>{t("myWork_title")}</h1>
 
         <p className="text-center mt-4 mb-10 px-6 text-gray-500">
-        Take a look at some of my 
-        <span className="text-black font-semibold"> recent projects</span> and see how I bring ideas to life.
+        {t("myWork_description")}
         </p>
       <div className="relative w-2/3 md:w-full ">
             <Carousel
@@ -92,8 +95,8 @@ const MyWork = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="" />
-              <CarouselNext className="" />
+              <CarouselPrevious className="cursor-pointer" />
+              <CarouselNext className="cursor-pointer" />
             </Carousel>
           </div>
 
