@@ -2,7 +2,7 @@
 import AboutMe from "../components/AboutMe"
 import Contacts from "../components/Contacts"
 import Footer from "../components/Footer"
-import Introduction from "../components/Introduction"
+import HeroSection from "../components/HeroSection"
 import MyWork from "../components/MyWork"
 import Navbar from "../components/Navbar"
 import Services from "../components/Services"
@@ -13,7 +13,7 @@ const Home = () => {
     <AppProvider>
     <div className='flex flex-col w-screen scroll-smooth justify-center  relative bg-gray-100'>
     <Navbar/>
-    <Introduction/>
+    <HeroSection/>
     <AboutMe/>
     <MyWork/>
     <Services/>

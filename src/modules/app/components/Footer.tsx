@@ -4,6 +4,9 @@ import { FaWhatsapp } from "react-icons/fa";
 import { Mail } from "lucide-react";
 import { Phone } from "lucide-react";
 import { MapPin } from "lucide-react";
+import { useClientStore } from "@/lib/store/clientStore";
+import { Globe } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 import {
   Select,
@@ -14,8 +17,11 @@ import {
 } from "@/components/ui/select"
 
 
+
 const Footer = () => {
 
+  const {language, setLanguage} = useClientStore()
+  const { t } = useTranslation()
 
   return (
     <>
@@ -23,13 +29,13 @@ const Footer = () => {
       
     <div className="w-full flex bg-gray-100  items-center justify-center">
         
-    <div className="sm:flex w-4/5 mt-10 justify-center ">
-                        <div className="flex flex-col gap-5 sm:w-1/2">
+    <div className="md:grid-cols-3 md:grid w-4/5 mt-10 justify-center ">
+                        <div className="flex flex-col gap-5">
                               <div className="flex flex-row gap-5">
                                 <div className="bg-blue-100 p-3 rounded-lg">
                                 <Mail className="text-blue-500"/>
                                 </div>
-                                <p className="font-semibold">Email <br/>
+                                <p className="font-semibold">{t("email")} <br/>
                                   <span className="font-normal">demo@gmail.com</span>
                                 </p>
                               </div>
@@ -38,7 +44,7 @@ const Footer = () => {
                                 <div className="bg-blue-100 p-3 rounded-lg">
                                 <Phone className="text-blue-500"/>
                                 </div>
-                                <p className="font-semibold">Phone <br/>
+                                <p className="font-semibold">{t("phone")} <br/>
                                   <span className="font-normal">013-456 7890</span>
                                 </p>
                               </div>
@@ -47,7 +53,7 @@ const Footer = () => {
                                 <div className="bg-blue-100 p-3 rounded-lg">
                                 <MapPin className="text-blue-500"/>
                                 </div>
-                                <p className="font-semibold">Location <br/>
+                                <p className="font-semibold">{t("location")} <br/>
                                   <span className="font-normal">Cheras, Kuala Lumpur</span>
                                 </p>
                               </div>
@@ -56,8 +62,8 @@ const Footer = () => {
                         </div>
 
 
-                        <div className="flex flex-col sm:w-1/2 mt-10 sm:mt-0">
-                          <p className="font-semibold">Follow Me</p>
+                        <div className="flex flex-col  mt-10 md:mt-0">
+                          <p className="font-semibold">{t("follow")}</p>
 
                           <div className="flex flex-row gap-2 mt-2">
 
@@ -80,21 +86,23 @@ const Footer = () => {
 
                           </div>
 
-                          {/* <Select
-                            value={formData.service}
-                            onValueChange={(val) => setFormData((prev) => ({ ...prev, service: val }))}
-                          >
-                            <SelectTrigger className="w-full py-6 font-bold mb-2">
-                              <SelectValue placeholder="Select a service" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              {services.map((srv, index) => (
-                                <SelectItem key={index} value={srv.service}>
-                                  {srv.title} — {srv.price}
-                                </SelectItem>
-                              ))}
+                         
+                        </div>
+
+                        <div className="flex flex-col mt-10 md:mt-0">
+                          <Select
+                          value={language}
+                          onValueChange={(val) => setLanguage(val as "en" | "zh")}
+                        >
+                          <SelectTrigger className="w-full bg-white py-6 font-bold mb-2 cursor-pointer">
+                            <SelectValue placeholder="Select a service" />
+                          </SelectTrigger>
+                          <SelectContent >
+                              <SelectItem className="cursor-pointer" value="en"><Globe/>English</SelectItem>
+                              <SelectItem className="cursor-pointer" value="zh"><Globe/>中文</SelectItem>
+                             
                             </SelectContent>
-                          </Select> */}
+                        </Select>                          
                         </div>
 
                   </div>

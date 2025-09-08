@@ -1,8 +1,10 @@
 import {  useRef,useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Navbar = () => {
 
     const navbarRef = useRef<HTMLDivElement>(null);
+    const {t} = useTranslation()
 
     useEffect(() => {
       let lastScrollY = window.scrollY;
@@ -33,13 +35,13 @@ const Navbar = () => {
                     <a href="#services" className="text-gray-700 hover:text-black hover:scale-105 cursor-pointer transition-transform duration-300">Services</a>
                     <a href="#contact" className="text-gray-700 hover:text-black hover:scale-105 cursor-pointer transition-transform duration-300">Contacts</a> */}
                       <a href="#about" className="text-gray-700 hover:text-black hover:scale-105 cursor-pointer transition-transform duration-300">
-                      关于我</a>
+                     {t("NavAboutMe")}</a>
                     <a href="#portfolio"  className="text-gray-700 hover:text-black hover:scale-105 cursor-pointer transition-transform duration-300">
-                    我的作品</a>
+                    {t("NavPortfolio")}</a>
                     <a href="#services" className="text-gray-700 hover:text-black hover:scale-105 cursor-pointer transition-transform duration-300">
-                    摄影项目</a>
+                    {t("NavServices")}</a>
                     <a href="#contact" className="text-gray-700 hover:text-black hover:scale-105 cursor-pointer transition-transform duration-300">
-                    联系我</a>
+                    {t("NavContacts")}</a>
                     </div>
               </div>
   )

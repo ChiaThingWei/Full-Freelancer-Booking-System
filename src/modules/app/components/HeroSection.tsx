@@ -2,12 +2,12 @@ import { ArrowDown } from 'lucide-react';
 import { useEffect } from 'react';
 import { moveUpGsap } from '../../../utils/AnimateGsap';
 import { useTranslation } from 'react-i18next';
+import { useClientStore } from '@/lib/store/clientStore';
 
-
-const Introduction = () => {
+const HeroSection = () => {
 
   const { t } = useTranslation()
-
+  const {clientData} = useClientStore()
 
  useEffect(() => {
 
@@ -20,10 +20,14 @@ const Introduction = () => {
        <div className='relative w-screen h-screen overflow-hidden'>
 
           <img
-          src='/images/sybackground.webp'
+          // src='/images/sybackground.webp'
+          src={clientData?.hero_img_url.hero_bgImg}
           alt='bg image'
           className='w-full object-cover h-full opacity-60'
           />
+
+        <div className="absolute inset-0 bg-blue-100 opacity-40"></div>
+
 
         
           <div  className='absolute flex my-auto flex-col z-10 inset-0  w-full justify-center gap-2 mx-auto md:flex-row md:items-center '>
@@ -39,7 +43,7 @@ const Introduction = () => {
               
               <div className=' mt-5 md:mt-0 w-4/5 mx-auto md:w-2/5'>
               
-                      <p className=' text-center md:text-start   text-black opacity-70 md:opacity-80 font-semibold'>
+                      <p className=' text-center md:text-start  opacity-70 md:opacity-80 font-semibold'>
                         <span className='text-2xl md:text-3xl font-semibold'>{t("hero_title")}</span>
                         <span className='font-semibold text-lg  md:text-2xl'>
                         <br/>
@@ -94,4 +98,4 @@ const Introduction = () => {
   )
 }
 
-export default Introduction
+export default HeroSection

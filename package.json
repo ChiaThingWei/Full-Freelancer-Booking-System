@@ -30,6 +30,7 @@
     "gsap": "^3.13.0",
     "i18next": "^25.5.2",
     "lodash": "^4.17.21",
+    "lottie-react": "^2.4.1",
     "lucide-react": "^0.536.0",
     "react": "^19.1.0",
     "react-datepicker": "^8.4.0",

@@ -1,9 +1,10 @@
-import { services } from "../../../utils/Utils"
+
 import { useState, useEffect } from "react";
 import BookingDatePicker from "../components/ReactDatepicker";
 import { supabase } from '../../../lib/supabaseClient';
 import toast from 'react-hot-toast';
 import { useTranslation } from "react-i18next";
+import { useClientStore } from "@/lib/store/clientStore";
 
 import {
   Select,
@@ -16,6 +17,7 @@ import {
 const Contacts = () => {
 
   const { t } = useTranslation()
+  const {services} = useClientStore()
    const [bookedSlots, setBookedSlots] = useState<string[]>([])
    const [loading, setLoading] = useState(false);
      const slots = ['9:00', '12:00', '15:00','18:00','21:00'];
@@ -125,7 +127,7 @@ const Contacts = () => {
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          placeholder="Name" 
+                          placeholder={t("formName")} 
                           className="w-full p-3 border-2 border-gray-300 rounded mb-4 mt-2"
                         />
 
@@ -134,7 +136,7 @@ const Contacts = () => {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          placeholder="Phone Number" 
+                          placeholder={t("formPhone")}  
                           className="w-full p-3 border-2 border-gray-300 rounded mb-4 mt-2"
                         />
 
@@ -143,7 +145,7 @@ const Contacts = () => {
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          placeholder="Email" 
+                          placeholder={t("formEmail")} 
                           className="w-full p-3 border-2 border-gray-300 rounded mb-4 mt-2"
                         />
 
@@ -152,11 +154,11 @@ const Contacts = () => {
                           onValueChange={(val) => setFormData((prev) => ({ ...prev, service: val }))}
                         >
                           <SelectTrigger className="w-full py-6 font-bold mb-2">
-                            <SelectValue placeholder="Select a service" />
+                            <SelectValue placeholder={t("formService")}  />
                           </SelectTrigger>
                           <SelectContent>
-                            {services.map((srv, index) => (
-                              <SelectItem key={index} value={srv.service}>
+                            {(services || []).map((srv, index) => (
+                              <SelectItem key={index} value={srv.title}>
                                 {srv.title} — {srv.price}
                               </SelectItem>
                             ))}
@@ -167,7 +169,7 @@ const Contacts = () => {
                           name="remarks"
                           value={formData.remarks}
                           onChange={handleChange}
-                          placeholder="Remarks"
+                          placeholder={t("formRemarks")} 
                           className="w-full mt-4 h-24 p-3 border-2 border-gray-300 rounded"
                         />
                       </div>
@@ -182,7 +184,7 @@ const Contacts = () => {
                           />
                         </div>
 
-                        <p className="text-gray-500 font-semibold py-2">Select a slot</p>
+                        <p className="text-gray-500 font-semibold py-2">{t("formSlot")} </p>
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-5">
                           {slots.map((slot) => {
                             const isBooked = bookedSlots.includes(slot)
@@ -206,9 +208,7 @@ const Contacts = () => {
                         </div>
 
                         <p className="text-gray-500 text-sm my-4">
-                          After submitting the reservation, we will contact you within 1-2 working
-                          days to confirm the information, date and shooting content. Please wait
-                          patiently for us to contact you 😊
+                        {t("formReminder")} 
                         </p>
 
                         <button
@@ -217,7 +217,7 @@ const Contacts = () => {
                             ${
                               loading ? 'opacity-50 cursor-not-allowed' : ''
                           } `}>
-                          Submit
+                          {t('formSubmit')}
                         </button>
                       </div>
                     </form>
