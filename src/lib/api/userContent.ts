@@ -5,7 +5,7 @@ export async function loadClientContent(client_id: number) {
     
     const { data, error } = await supabase
     .from("clients")
-    .select("id,name,hero_img_url,domain")
+    .select("id,name,hero_img_url,domain,hero_text_color,email,phone,location,facebook,instagram,whatsapp")
     .eq("id", client_id)
     .single();
 
@@ -39,4 +39,25 @@ export interface Service {
     }
   
     return data as Service[]
+  }
+
+  export interface ClientWork {
+    title: string;
+    description: string;
+    image_url: string;
+  }
+
+  export async function loadClientWorks(client_id: number, language: string): Promise<ClientWork[]> {
+    const { data, error } = await supabase
+      .from("client_work")
+      .select("title, description, image_url")
+      .eq("client_id", client_id)
+      .eq("language", language);
+  
+    if (error) {
+      console.error("Error fetching client_work:", error.message);
+      return [];
+    }
+  
+    return data as ClientWork[];
   }

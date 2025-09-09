@@ -5,9 +5,10 @@ import { useClientStore } from "@/lib/store/clientStore";
 import { loadTranslations } from "@/lib/api/language";
 import { loadClientContent } from "@/lib/api/userContent";
 import { loadServices } from "@/lib/api/userContent";
+import { loadClientWorks } from "@/lib/api/userContent";
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
-  const { language, setClientData, setServices } = useClientStore();
+  const { language, setClientData, setServices, setPortfolioData } = useClientStore();
   const { i18n } = useTranslation();
  
 
@@ -26,9 +27,14 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
       const servicesData = await loadServices(2, language);
       setServices(servicesData);
       console.log("Services Data:", servicesData);
+
+      const portfolioData = await loadClientWorks(2, language);
+      setPortfolioData(portfolioData);
+      console.log("Portfolio Data:", portfolioData);
+
     }
     fetchData();
-  }, [language, i18n,setClientData,setServices]);
+  }, [language, i18n,setClientData,setServices, setPortfolioData]);
 
   return <>{children}</>;
 }

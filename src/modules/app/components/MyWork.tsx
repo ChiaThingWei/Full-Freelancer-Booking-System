@@ -7,52 +7,21 @@ import {
   } from "@/components/ui/carousel"
 
   import Autoplay from "embla-carousel-autoplay"
-
-    import portfolio1 from '/images/js-graduate.webp'
-    import portfolio2 from '/images/szeying2.webp'
-    import portfolio3 from '/images/pro1.webp'
-    import portfolio4 from '/images/fam.webp'
-    import portfolio5 from '/images/outdoor.webp'
     import { useTranslation } from "react-i18next"
+    import { useClientStore } from "@/lib/store/clientStore"
 
-  const portfolioItems = [
-    {
-      image: portfolio1,
-      title: "Graduation Photoshoot",
-      description: "Capture your academic achievements with style"
-    },
-    {
-      image: portfolio2,
-      title: "OOTD Photoshoot",
-      description: "Showcase your fashion sense and personality"
-    },
-    {
-      image: portfolio3,
-      title: "Professional Headshots",
-      description: "Clean and polished portraits for your career"
-    },
-    {
-      image: portfolio4,
-      title: "Family Portraits",
-      description: "Cherish moments with your loved ones"
-    },
-    {
-      image: portfolio5,
-      title: "Outdoor Lifestyle Shoot",
-      description: "Natural and candid moments in beautiful settings"
-    }
-  ];
-
+  
 const MyWork = () => {
 
  const { t } = useTranslation()
+ const {portfolioData, language} = useClientStore()
 
   return (
     <section id='portfolio' className=' '>
       <div className=' w-screen h-screen bg-gray-100 flex items-center overflow-hidden'>
 
       <div className='flex flex-col mx-auto md:w-4/5 justify-center items-center'>
-      <h1 className=' text-2xl lg:text-4xl mx-auto font-semibold'>{t("myWork_title")}</h1>
+      <h1 className={` ${language === 'en'? 'text-3xl':'text-2xl'} cormorant-garamond text-2xl lg:text-4xl mx-auto font-semibold`}>{t("myWork_title")}</h1>
 
         <p className="text-center mt-4 mb-10 px-6 text-gray-500">
         {t("myWork_description")}
@@ -71,12 +40,12 @@ const MyWork = () => {
               className="w-full"
             >
               <CarouselContent className="-ml-2 md:-ml-4">
-                {portfolioItems.map((item, index) => (
+                {portfolioData?.map((item, index) => (
                   <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/4">
                    
                         <div className="relative group overflow-hidden">
                           <img
-                            src={item.image}
+                            src={item.image_url}
                             alt={item.title}
                             className="w-full h-100 object-cover transition-transform duration-300 group-hover:scale-105"
                           />

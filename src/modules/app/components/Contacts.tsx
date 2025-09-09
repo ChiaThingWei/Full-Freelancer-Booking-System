@@ -17,7 +17,7 @@ import {
 const Contacts = () => {
 
   const { t } = useTranslation()
-  const {services} = useClientStore()
+  const {services, language} = useClientStore()
    const [bookedSlots, setBookedSlots] = useState<string[]>([])
    const [loading, setLoading] = useState(false);
      const slots = ['9:00', '12:00', '15:00','18:00','21:00'];
@@ -114,7 +114,7 @@ const Contacts = () => {
               <div className=' w-screen h-auto bg-gray-100 flex items-center overflow-hidden'>
 
                 <div className='flex flex-col mx-auto w-4/5  justify-center items-center'>
-                  <h1 className=' text-2xl lg:text-4xl mt-10  mx-auto font-semibold'>{t("booking_title")}</h1>
+                  <h1 className={` ${language === 'en'? 'text-3xl':'text-2xl'} cormorant-garamond  lg:text-4xl mt-10  mx-auto font-semibold`}>{t("booking_title")}</h1>
                   <p className="text-gray-500 mt-2">{t("booking_description")}</p>
 
                  

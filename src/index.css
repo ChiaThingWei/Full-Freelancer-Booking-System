@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Dancing+Script:wght@400..700&family=Lavishly+Yours&family=Markazi+Text:wght@400..700&family=Meow+Script&family=Monsieur+La+Doulaise&family=Playwrite+AU+SA:wght@100..400&family=Playwrite+AU+VIC+Guides&family=Whisper&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -16,6 +17,23 @@ html {
 .react-datepicker__day:hover {
   @apply bg-teal-100;
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE/Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+
+.cormorant-garamond {
+  font-family: "Cormorant Garamond", serif;
+  font-optical-sizing: auto;
+  font-weight: 700; /* 你要的字重，比如 400、500、700 */
+  font-style: normal;
+}
+
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

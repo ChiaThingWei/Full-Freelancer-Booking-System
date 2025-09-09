@@ -1,5 +1,4 @@
 import { SiInstagram } from "react-icons/si";
-import { SiXiaohongshu } from "react-icons/si";
 import { FaWhatsapp } from "react-icons/fa";
 import { Mail } from "lucide-react";
 import { Phone } from "lucide-react";
@@ -7,6 +6,7 @@ import { MapPin } from "lucide-react";
 import { useClientStore } from "@/lib/store/clientStore";
 import { Globe } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { SiFacebook } from "react-icons/si";
 
 import {
   Select,
@@ -20,7 +20,7 @@ import {
 
 const Footer = () => {
 
-  const {language, setLanguage} = useClientStore()
+  const {language, setLanguage, clientData} = useClientStore()
   const { t } = useTranslation()
 
   return (
@@ -36,7 +36,7 @@ const Footer = () => {
                                 <Mail className="text-blue-500"/>
                                 </div>
                                 <p className="font-semibold">{t("email")} <br/>
-                                  <span className="font-normal">demo@gmail.com</span>
+                                  <span className="font-normal">{clientData?.email}</span>
                                 </p>
                               </div>
 
@@ -45,7 +45,7 @@ const Footer = () => {
                                 <Phone className="text-blue-500"/>
                                 </div>
                                 <p className="font-semibold">{t("phone")} <br/>
-                                  <span className="font-normal">013-456 7890</span>
+                                  <span className="font-normal">{clientData?.phone}</span>
                                 </p>
                               </div>
 
@@ -54,7 +54,7 @@ const Footer = () => {
                                 <MapPin className="text-blue-500"/>
                                 </div>
                                 <p className="font-semibold">{t("location")} <br/>
-                                  <span className="font-normal">Cheras, Kuala Lumpur</span>
+                                  <span className="font-normal">{clientData?.location}</span>
                                 </p>
                               </div>
 
@@ -67,18 +67,18 @@ const Footer = () => {
 
                           <div className="flex flex-row gap-2 mt-2">
 
-                          <a href=''  
+                          <a href={clientData?.instagram}  
                               target="_blank" className='text-black bg-white  cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300  rounded-lg p-3  border-1 '>
                             <SiInstagram   className='my-auto size-5'/>
                            </a>
 
-                           <a href=''  
+                           <a href={clientData?.facebook} 
                               target="_blank" className='text-black bg-white  cursor-pointer hover:bg-blue-500 hover:text-white transition-colors duration-300 rounded-lg p-3  border-1 '>
-                             <SiXiaohongshu  className='my-auto size-5'/>
+                             <SiFacebook  className='my-auto size-5'/>
                             
                           </a>
 
-                          <a href=''  
+                          <a href={clientData?.whatsapp}  
                               target="_blank" className='text-black bg-white cursor-pointer hover:bg-blue-500 hover:text-white transition-colors  duration-300 rounded-lg p-3 border-1'>
                               <FaWhatsapp className='my-auto size-5'/>
                          

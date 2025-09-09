@@ -7,7 +7,7 @@ import { useClientStore } from '@/lib/store/clientStore';
 const HeroSection = () => {
 
   const { t } = useTranslation()
-  const {clientData} = useClientStore()
+  const {clientData, language} = useClientStore()
 
  useEffect(() => {
 
@@ -33,8 +33,8 @@ const HeroSection = () => {
           <div  className='absolute flex my-auto flex-col z-10 inset-0  w-full justify-center gap-2 mx-auto md:flex-row md:items-center '>
               <div id="yo" className='yo opacity-100 mx-auto md:w-2/5 '>
                 <img
-                src='/images/seiyu.webp'
-                alt="seiyu"
+                src={clientData?.hero_img_url.profile_img}
+                alt="profile image"
                 className='hover:scale-105 trnasition-transform duration-300 mx-auto my-auto object-cover shrink-0 w-[200px] h-[200px] rounded-full md:w-[300px] md:h-[300px] '
                 loading="lazy"
                 />
@@ -43,19 +43,21 @@ const HeroSection = () => {
               
               <div className=' mt-5 md:mt-0 w-4/5 mx-auto md:w-2/5'>
               
-                      <p className=' text-center md:text-start  opacity-70 md:opacity-80 font-semibold'>
+                      <p className={`${clientData?.hero_text_color} cormorant-garamond  text-center md:text-start  opacity-70 md:opacity-80 font-semibold`}>
                         <span className='text-2xl md:text-3xl font-semibold'>{t("hero_title")}</span>
                         <span className='font-semibold text-lg  md:text-2xl'>
                         <br/>
                        
                           {/* {t("hero_title2")}<br/> */}
                         </span>
-                        <span className='text-md text-start flex-wrap'>
+                        <span className={`${language === 'en' ? 'text-xl ': 'text-md'}text-start flex-wrap`}>
                         <br/>
                        
                         {t("hero_description")}
                         </span>
                         </p>
+
+                      
 
                         <div className='w-full h-[50px] mt-10 flex flex-row justify-evenly md:justify-start md:gap-14 '>
 
