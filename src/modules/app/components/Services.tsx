@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useClientStore } from "@/lib/store/clientStore";
 import type { Service } from "@/lib/api/userContent";
 
+
 const Services = () => {
 
   const { t } = useTranslation()
@@ -54,18 +55,33 @@ const Services = () => {
 
   {/* Modal */}
   {selectedService && (
-    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
-      <div className="bg-white px-10 pt-10 pb-6 rounded-lg shadow-lg max-w-md w-full mx-auto">
+    <div 
+    onClick={() => setSelectedService(null)}
+    className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4">
+      <div className="bg-white lg:flex lg:justify-evenly h-auto gap-5 px-10 pt-10 pb-6 rounded-lg shadow-lg max-w-4/5 md:max-w-3/5 mx-auto">
+
+
+        <div>
+          <img
+          src={selectedService.image_url}
+          alt="Service"
+          className="w-50 h-60 lg:w-80 lg:h-100 object-cover mx-auto mb-4"
+          />
+        </div>
+
+        <div className="md:flex md:flex-col md:justify-between">
+          <div>
         <h2 className="text-2xl font-semibold mb-4 text-center">{selectedService.title}</h2>
         <p className="mb-4 text-gray-500 text-center">{selectedService.description}</p>
 
-        <ul className="mt-6 text-center">
+        <ul className="mt-6 text-start md:ml-4">
           {selectedService.details.map((item: string, idx: number) => (
             <li key={idx} className="text-md mb-1">• {item}</li>
           ))}
         </ul>
+        </div>
 
-        <div className="flex justify-evenly mt-12 w-full">
+        <div className="flex justify-evenly mt-10 w-full">
           <button
             onClick={() => setSelectedService(null)}
             className="px-4 py-2 bg-gray-300 text-white rounded cursor-pointer hover:text-black transition-colors duration-300"
@@ -74,10 +90,12 @@ const Services = () => {
           </button>
           <a
             href="#contact"
+            onClick={() => setSelectedService(null)}
             className="px-4 py-2 bg-blue-500 text-white rounded hover:text-black transition-colors duration-300 flex items-center justify-center"
           >
             {t("serviceCardBooking")}
           </a>
+          </div>
         </div>
       </div>
     </div>

@@ -23,6 +23,7 @@ export interface Service {
     description: string
     details: string[]   // jsonb 存的是 array
     price: string
+    image_url: string
     duration: number
   }
 

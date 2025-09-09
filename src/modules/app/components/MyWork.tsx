@@ -7,8 +7,11 @@ import {
   } from "@/components/ui/carousel"
 
   import Autoplay from "embla-carousel-autoplay"
-    import { useTranslation } from "react-i18next"
-    import { useClientStore } from "@/lib/store/clientStore"
+  import { useTranslation } from "react-i18next"
+  import { useClientStore } from "@/lib/store/clientStore"
+  import {motion} from "framer-motion"
+  import { useInView } from "framer-motion"
+  import { useRef } from "react"
 
   
 const MyWork = () => {
@@ -16,12 +19,24 @@ const MyWork = () => {
  const { t } = useTranslation()
  const {portfolioData, language} = useClientStore()
 
+ const ref = useRef(null);
+ const isInView = useInView(ref, { once: true, margin: "-150px" }); 
+
+
   return (
     <section id='portfolio' className=' '>
       <div className=' w-screen h-screen bg-gray-100 flex items-center overflow-hidden'>
 
       <div className='flex flex-col mx-auto md:w-4/5 justify-center items-center'>
+
+      <motion.div
+        ref={ref}
+        initial={{ x: -200, opacity: 0 }}     // 初始在上方 & 隐藏
+        animate={isInView ? { x: 0, opacity: 1 } : {}} // 进入视口时掉下来
+        transition={{ duration: 2, ease: "easeOut" }}
+      >
       <h1 className={` ${language === 'en'? 'text-3xl':'text-2xl'} cormorant-garamond text-2xl lg:text-4xl mx-auto font-semibold`}>{t("myWork_title")}</h1>
+      </motion.div>
 
         <p className="text-center mt-4 mb-10 px-6 text-gray-500">
         {t("myWork_description")}
@@ -41,7 +56,7 @@ const MyWork = () => {
             >
               <CarouselContent className="-ml-2 md:-ml-4">
                 {portfolioData?.map((item, index) => (
-                  <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/4">
+                  <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
                    
                         <div className="relative group overflow-hidden">
                           <img
