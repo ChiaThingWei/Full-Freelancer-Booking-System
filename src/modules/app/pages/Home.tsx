@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar"
 import Services from "../components/Services"
 import { AppProvider } from "../components/AppProvider"
 
+
 const Home = () => {
   return (
     <AppProvider>
