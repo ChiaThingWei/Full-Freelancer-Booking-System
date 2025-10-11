@@ -40,7 +40,7 @@ const DistributionChart = () => {
             <Tooltip />
             <Legend />
             <Bar dataKey="value" radius={[4, 4, 0, 0]}>
-                {statsData?.serviceTotals.map((entry, index) => (
+                {statsData?.serviceTotals.map((_, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                
                 ))}

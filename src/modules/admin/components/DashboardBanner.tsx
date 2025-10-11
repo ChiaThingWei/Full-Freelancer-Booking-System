@@ -1,5 +1,4 @@
 import { useUserProfile } from '@/lib/hooks/useProfileQuery';
-import React from 'react'
 
 const Banner = () => {
 
